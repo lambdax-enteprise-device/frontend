@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "./auth/react-auth0-spa";
 
-const NavBar = () => {
+const NavBar = props => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
     <div>
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
+        <span>
+          <Link to="/login">Sign In</Link>
+        </span>
       )}
 
       {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
@@ -24,3 +26,13 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+/*
+Orignal onClick event that Ang put in. 
+ <button
+          onClick={() =>
+            loginWithRedirect({ })
+          }
+        >
+
+*/
