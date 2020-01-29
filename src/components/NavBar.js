@@ -8,31 +8,12 @@ const NavBar = props => {
   return (
     <div>
       {!isAuthenticated && (
-        <span>
-          <Link to="/login">Sign In</Link>
-        </span>
+        <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
 
       {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
-
-      {isAuthenticated && (
-        <span>
-          <Link to="/">Home</Link>&nbsp;
-          <Link to="/profile">Profile</Link>
-        </span>
-      )}
     </div>
   );
 };
 
 export default NavBar;
-
-/*
-Orignal onClick event that Ang put in. 
- <button
-          onClick={() =>
-            loginWithRedirect({ })
-          }
-        >
-
-*/
