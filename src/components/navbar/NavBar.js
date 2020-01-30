@@ -1,15 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "../auth/react-auth0-spa";
+import { Navbar, Nav } from "react-bootstrap";
 
-import "./NavBar.scss";
+// import "./NavBar.scss";
 
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
     <div className="navbar-wrapper">
-      <div className="navbar-left">
+      <Navbar fixed="top" variant="dark" bg="dark">
+        <Navbar.Brand href="/">Enterprise Devices</Navbar.Brand>
+        {!isAuthenticated && (
+          <Nav className="mr-auto">
+            <Nav.Link href="/" bg="primary">
+              Home
+            </Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+          </Nav>
+        )}
+      </Navbar>
+      {/* <div className="navbar-left">
         <Link to="/">Enterprise Devices</Link>
       </div>
 
@@ -26,7 +38,7 @@ const NavBar = () => {
             <Link to="/profile">Profile</Link>
           </span>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
