@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "../auth/react-auth0-spa";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 
 // import "./NavBar.scss";
 
@@ -18,6 +18,19 @@ const NavBar = () => {
               Home
             </Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
+          </Nav>
+        )}
+        {isAuthenticated && (
+          <Nav>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Button>Logout</Button> {/* Will need to build functionality */}
+          </Nav>
+        )}
+        {!isAuthenticated && (
+          <Nav>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            {/* Button needs to be styled */}
+            <Button href="/login">Login</Button>{" "}
           </Nav>
         )}
       </Navbar>
