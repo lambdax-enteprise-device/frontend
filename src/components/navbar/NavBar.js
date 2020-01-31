@@ -27,6 +27,7 @@ const NavBar = () => {
 
       <div className="navbar-right">
         {!isAuthenticated && (
+                //! This will be how the login/ logout will work, just need .env vars. 
           <button onClick={() => loginWithRedirect({})}>Log in</button>
         )}
 

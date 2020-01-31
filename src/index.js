@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./components/auth/react-auth0-spa";
 import history from "./components/utils/history";
-import config from "./auth_config.json";
+// import config from "./auth_config.json";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
