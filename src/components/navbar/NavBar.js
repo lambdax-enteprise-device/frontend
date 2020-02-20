@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "../auth/react-auth0-spa";
 import { Navbar, Nav, Button } from "react-bootstrap";
 
-// import "./NavBar.scss";
-
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
@@ -30,7 +28,7 @@ const NavBar = () => {
           <Nav>
             <Nav.Link href="/signup">Sign Up</Nav.Link>
             {/* Button needs to be styled */}
-            <Button href="/login">Login</Button>{" "}
+            <Button href="/login">Login</Button>
           </Nav>
         )}
       </Navbar>
