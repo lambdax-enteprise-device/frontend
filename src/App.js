@@ -4,6 +4,8 @@ import { Router, Route, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import Registration from "./components/Login/Registration"
+import Login from "./components/Login/Login"
 
 import history from "./components/utils/history";
 
@@ -24,6 +26,8 @@ function App() {
         </header>
         <Switch>
           <Route path="/" exact />
+          <Route exact path="/login" component={Login} />
+        <Route exact path="/registration" component={Registration} />
           <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </Router>
