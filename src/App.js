@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 // import Profile from "./components/Profile";
 // import PrivateRoute from "./components/PrivateRoute";
 
@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-        <header>
+        {/* <header>
           <NavBar />
-        </header>
+        </header> */}
         <Switch>
           <Route path="/" exact />
           {/* <PrivateRoute path="/profile" component={Profile} /> */}
