@@ -3,9 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "./components/auth/react-auth0-spa";
-import history from "./components/utils/history";
-import config from "./auth_config.json";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
@@ -17,16 +14,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 require("dotenv").config();
 
-// A function that routes the user to the right place
-// after login
-const onRedirectCallback = appState => {
-  history.push(
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.pathname
-  );
-};
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -35,18 +22,11 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Auth0Provider
-    domain={process.env.REACT_APP_DOMAIN}
-    client_id={process.env.REACT_APP_CLIENTID}
-    redirect_uri={window.location.origin}
-    onRedirectCallback={onRedirectCallback}
-  >
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </Auth0Provider>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
