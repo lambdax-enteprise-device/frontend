@@ -10,3 +10,5 @@ export const axiosWithAuth = token => {
     baseURL: process.env.REACT_APP_LOCALURL
   });
 };
+
+export default axiosWithAuth;

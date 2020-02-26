@@ -1,7 +1,7 @@
 import React from "react";
 import { withFormik, Field, Form } from "formik";
 import * as Yup from "yup";
-import axiosWithAuth from "../Security/axiosWithAuth";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 function RegistrationForm({ values, errors, touched, isSubmitting }) {
   return (
