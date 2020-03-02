@@ -7,7 +7,8 @@ import { Router, Route, Switch } from "react-router-dom";
 
 import history from "./components/utils/history";
 
-import Login from "./components/Login";
+import Login from "./components/auth/Login";
+import SignupForm from "./components/auth/SignUp";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" exact />
           {/* <PrivateRoute path="/profile" component={Profile} /> */}
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignupForm} />
         </Switch>
       </Router>
     </div>
