@@ -32,8 +32,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    // width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -83,80 +86,88 @@ const SignupForm = () => {
     }
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <TextField
-        label="First Name"
-        name="firstName"
-        type="text"
-        id="first-name"
-        required
-        {...formik.getFieldProps("firstName")}
-      />
-      {formik.touched.firstName && formik.errors.firstName ? (
-        <div>{formik.errors.firstName}</div>
-      ) : null}
-      {/* <label htmlFor="lastName">Last Name</label> */}
-      <TextField
-        label="Last Name"
-        name="lastName"
-        type="text"
-        id="last-name"
-        required
-        {...formik.getFieldProps("lastName")}
-      />
-      {formik.touched.lastName && formik.errors.lastName ? (
-        <div>{formik.errors.lastName}</div>
-      ) : null}
+    <Container component="main" maxWidth="s">
+      <CssBaseline />
+      <Paper className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+        <form onSubmit={formik.handleSubmit} className={classes.form}>
+          <TextField
+            label="First Name"
+            name="firstName"
+            type="text"
+            id="first-name"
+            required
+            {...formik.getFieldProps("firstName")}
+          />
+          {formik.touched.firstName && formik.errors.firstName ? (
+            <div>{formik.errors.firstName}</div>
+          ) : null}
+          {/* <label htmlFor="lastName">Last Name</label> */}
+          <TextField
+            label="Last Name"
+            name="lastName"
+            type="text"
+            id="last-name"
+            required
+            {...formik.getFieldProps("lastName")}
+          />
+          {formik.touched.lastName && formik.errors.lastName ? (
+            <div>{formik.errors.lastName}</div>
+          ) : null}
 
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        id="email"
-        required
-        {...formik.getFieldProps("email")}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            id="email"
+            required
+            {...formik.getFieldProps("email")}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
 
-      <TextField
-        label="Confirm Email"
-        name="confirmEmail"
-        type="email"
-        id="email-confirm"
-        required
-        {...formik.getFieldProps("confirmEmail")}
-      />
-      {formik.touched.confirmEmail && formik.errors.confirmEmail ? (
-        <div>{formik.errors.confirmEmail}</div>
-      ) : null}
+          <TextField
+            label="Confirm Email"
+            name="confirmEmail"
+            type="email"
+            id="email-confirm"
+            required
+            {...formik.getFieldProps("confirmEmail")}
+          />
+          {formik.touched.confirmEmail && formik.errors.confirmEmail ? (
+            <div>{formik.errors.confirmEmail}</div>
+          ) : null}
 
-      <TextField
-        label="Password"
-        name="password"
-        type="password"
-        id="password"
-        required
-        {...formik.getFieldProps("password")}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
+          <TextField
+            label="Password"
+            name="password"
+            type="password"
+            id="password"
+            required
+            {...formik.getFieldProps("password")}
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <div>{formik.errors.password}</div>
+          ) : null}
 
-      <TextField
-        label="Confirm Password"
-        name="confirmPassword"
-        type="password"
-        id="password"
-        required
-        {...formik.getFieldProps("confirmPassword")}
-      />
-      {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-        <div>{formik.errors.confirmPassword}</div>
-      ) : null}
-      <Button type="submit">Submit</Button>
-    </form>
+          <TextField
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            id="password"
+            required
+            {...formik.getFieldProps("confirmPassword")}
+          />
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+            <div>{formik.errors.confirmPassword}</div>
+          ) : null}
+          <Button type="submit">Submit</Button>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 
