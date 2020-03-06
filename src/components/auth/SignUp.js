@@ -27,10 +27,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     padding: "15%"
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
   form: {
     // width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -86,7 +82,7 @@ const SignupForm = () => {
     }
   });
   return (
-    <Container component="main" maxWidth="s">
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -164,7 +160,15 @@ const SignupForm = () => {
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
             <div>{formik.errors.confirmPassword}</div>
           ) : null}
-          <Button type="submit">Submit</Button>
+          <Button
+            type="submit"
+            className={classes.submit}
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
+            Submit
+          </Button>
         </form>
       </Paper>
     </Container>
