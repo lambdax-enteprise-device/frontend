@@ -1,4 +1,8 @@
-// import React, { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,10 +18,6 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 
 import { makeStyles } from "@material-ui/core/styles";
-
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -43,13 +43,13 @@ const SignupForm = () => {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
-      password: "",
-      confirmPassword: "",
-      companyName: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      confirmEmail: ""
+      password: "12345678",
+      confirmPassword: "12345678",
+      companyName: "My Company",
+      firstName: "Joel",
+      lastName: "Perez",
+      email: "joel@joelperez.dev",
+      confirmEmail: "joel@joelperez.dev"
     },
     validationSchema: Yup.object({
       password: Yup.string()
@@ -75,10 +75,23 @@ const SignupForm = () => {
         .email("Invalid email address")
         .required("Required")
         .oneOf([Yup.ref("email"), null], "Email addresses must match")
+      // TODO: Require complex passwords
     }),
+    // TODO: Update to only validate during onBlur events
     onSubmit: values => {
-      console.log(values);
       alert(JSON.stringify(values, null, 2));
+      console.log(values);
+      axios
+        .post(
+          "https://enterprise-devices.herokuapp.com/api/auth/signup",
+          values
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   });
   return (
@@ -95,6 +108,7 @@ const SignupForm = () => {
             type="text"
             id="first-name"
             required
+            onChange={formik.handleChange}
             {...formik.getFieldProps("firstName")}
           />
           {formik.touched.firstName && formik.errors.firstName ? (
@@ -112,6 +126,15 @@ const SignupForm = () => {
           {formik.touched.lastName && formik.errors.lastName ? (
             <div>{formik.errors.lastName}</div>
           ) : null}
+          <TextField
+            label="Company Name"
+            name="companyName"
+            type="text"
+            id="company-name"
+            required
+            onChange={formik.handleChange}
+            {...formik.getFieldProps("companyName")}
+          />
 
           <TextField
             label="Email"
