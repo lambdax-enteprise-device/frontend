@@ -46,6 +46,7 @@ const SignupForm = () => {
       password: "12345678",
       confirmPassword: "12345678",
       companyName: "My Company",
+      title: "IT Manager",
       firstName: "Joel",
       lastName: "Perez",
       email: "joel@joelperez.dev",
@@ -61,6 +62,9 @@ const SignupForm = () => {
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
       companyName: Yup.string()
         .max(120, "Must be 20 characters or more")
+        .required("Required"),
+      title: Yup.string()
+        .max(64, "Must be 64 characters or less")
         .required("Required"),
       firstName: Yup.string()
         .max(120, "Must be 120 characters or less")
@@ -79,19 +83,20 @@ const SignupForm = () => {
     }),
     // TODO: Update to only validate during onBlur events
     onSubmit: values => {
+      // Remove keys not needed
+      delete values.confirmEmail;
+      delete values.confirmPassword;
       alert(JSON.stringify(values, null, 2));
+      // values = JSON.stringify(values);
       console.log(values);
-      axios
-        .post(
-          "https://enterprise-devices.herokuapp.com/api/auth/signup",
-          values
-        )
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // axios
+      //   .post("http://enterprise-devices.herokuapp.com/api/auth/signup", values)
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
   });
   return (
@@ -134,6 +139,15 @@ const SignupForm = () => {
             required
             onChange={formik.handleChange}
             {...formik.getFieldProps("companyName")}
+          />
+          <TextField
+            label="Job Title"
+            name="title"
+            type="text"
+            id="title"
+            required
+            onChange={formik.handleChange}
+            {...formik.getFieldProps("title")}
           />
 
           <TextField
