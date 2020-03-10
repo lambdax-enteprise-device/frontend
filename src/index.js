@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -10,7 +10,9 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import rootReducer from "./reducers";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
+import "./index.css";
 
 require("dotenv").config();
 
@@ -22,11 +24,13 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </CookiesProvider>,
   document.getElementById("root")
 );
 

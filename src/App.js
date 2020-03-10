@@ -1,5 +1,7 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
+import { withCookies } from "react-cookie";
 
 // import NavBar from "./components/NavBar";
 // import Profile from "./components/Profile";
@@ -8,7 +10,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       {/* <header>
@@ -17,11 +19,17 @@ function App() {
       <Switch>
         <Route path="/" exact />
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignupForm} />
+        <Route
+          path="/login"
+          render={(...props) => <Login cookies={props.cookies} />}
+        />
+        <Route
+          path="/signup"
+          render={(...props) => <SignupForm cookies={props.cookies} />}
+        />
       </Switch>
     </div>
   );
 }
 
-export default App;
+export default withCookies(App);
