@@ -83,20 +83,37 @@ const SignupForm = () => {
     }),
     // TODO: Update to only validate during onBlur events
     onSubmit: values => {
-      // Remove keys not needed
-      delete values.confirmEmail;
-      delete values.confirmPassword;
-      alert(JSON.stringify(values, null, 2));
+      //* Formatting request object for submission
+      const {
+        firstName,
+        lastName,
+        title,
+        companyName,
+        password,
+        email
+      } = values;
+      const signUpInfo = {
+        first_name: firstName,
+        last_name: lastName,
+        company_name: companyName,
+        title: title,
+        email: email,
+        password: password
+      };
+
+      alert(JSON.stringify(signUpInfo, null, 2));
       // values = JSON.stringify(values);
-      console.log(values);
-      // axios
-      //   .post("http://enterprise-devices.herokuapp.com/api/auth/signup", values)
-      //   .then(res => {
-      //     console.log(res);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+      axios
+        .post(
+          "http://enterprise-devices.herokuapp.com/api/auth/signup",
+          signUpInfo
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   });
   return (
