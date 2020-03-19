@@ -1,5 +1,4 @@
-export const VIEW_DEVICES = "VIEW_DEVICES";
-export const VIEW_REQUESTS = "VIEW_REQUESTS";
+import { VIEW_DEVICES, VIEW_REQUESTS, FAILURE} from './index';
 
 const initialState = {
   requests: [],
@@ -20,6 +19,11 @@ export const navReducer = (state = initialState, action) => {
         ...state,
         requests: action.payload,
         error: ""
+      };
+    case FAILURE:
+      return {
+        ...state,
+        error: action.payload
       };
     default:
       return state;

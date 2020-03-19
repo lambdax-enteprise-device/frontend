@@ -1,4 +1,4 @@
-export const LOGIN = "LOGIN";
+import { LOGIN, FAILURE } from './index'; 
 
 const initialState = {
   loggedInUser: "",
@@ -13,6 +13,11 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         loggedInUser: action.payload,
         error: ""
+      };
+    case FAILURE:
+      return {
+        ...state,
+        error: action.payload
       };
     default:
       return state;
