@@ -10,6 +10,7 @@ import { withCookies } from "react-cookie";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
+import EquipmentRequest from "./components/EquipmentRequest.js";
 
 function App(props) {
   return (
@@ -31,6 +32,10 @@ function App(props) {
         <Route
           path="/dashboard"
           render={(...props) => <Dashboard cookies={props.cookies} />}
+        />
+        <Route 
+          path="/equipment-request"
+          render={(...props) => <EquipmentRequest cookies={props.cookies} />}
         />
       </Switch>
     </div>
