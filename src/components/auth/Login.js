@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 
 // import Avatar from "@material-ui/core/Avatar";
@@ -40,28 +42,59 @@ const useStyles = makeStyles(theme => ({
 const Login = props => {
   const { cookies } = props;
   const classes = useStyles(); //material ui class
-  const [values, setValues] = useState({ email: "", password: "" }); //hook to hold values of email & pw
+  // const [values, setValues] = useState({ email: "", password: "" }); //hook to hold values of email & pw
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validateOnChange: false, //* To prevent onChange validation so errors don't pop until onBlur
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("This field is required"),
+      password: Yup.string()
+        .min(8, "Password must be 8 characters or more")
+        .required("This field is required")
+    }),
+    onSubmit: values => {
+      axios
+        .post("http://localhost:5555/api/auth/login", {
+          ...values,
+          credentials: "same-origin"
+        })
+        .then(res => {
+          cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard
+        })
+        .catch(error => {
+          console.log(error);
+          //TODO: Render error Div
+        });
+    }
+  });
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(values);
-    axios
-      .post("http://localhost:5555/api/auth/login", {
-        ...values,
-        credentials: "same-origin"
-      })
-      .then(res => {
-        cookies.set("entDeviceToken", res.data.token, { path: "/" });
-        //TODO: Once completed, push user to dashboard
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  // const handleChange = e => {
+  //   const { name, value } = e.target;
+  //   setValues({ ...values, [name]: value });
+  // };
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log(values);
+  //   axios
+  //     .post("http://localhost:5555/api/auth/login", {
+  //       ...values,
+  //       credentials: "same-origin"
+  //     })
+  //     .then(res => {
+  //       cookies.set("entDeviceToken", res.data.token, { path: "/" });
+  //       //TODO: Once completed, push user to dashboard
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //       //TODO: Render error Div
+  //     });
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,7 +104,11 @@ const Login = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        <form
+          className={classes.form}
+          onSubmit={formik.handleSubmit}
+          noValidate
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -82,7 +119,10 @@ const Login = props => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={handleChange}
+            onChange={formik.handleChange}
+            error={formik.touched.email && formik.errors.email ? true : false}
+            helperText={formik.errors.email}
+            {...formik.getFieldProps("email")}
           />
           <TextField
             variant="outlined"
@@ -94,7 +134,12 @@ const Login = props => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={handleChange}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.password && formik.errors.password ? true : false
+            }
+            helperText={formik.errors.password}
+            {...formik.getFieldProps("password")}
           />
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
