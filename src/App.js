@@ -9,6 +9,7 @@ import { withCookies } from "react-cookie";
 
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App(props) {
   return (
@@ -23,6 +24,10 @@ function App(props) {
         <Route
           path="/signup"
           render={() => <SignupForm cookies={props.cookies} />}
+        />
+        <Route
+          path="/dashboard"
+          render={(...props) => <Dashboard cookies={props.cookies} />}
         />
       </Switch>
     </div>
