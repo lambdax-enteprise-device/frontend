@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from "@material-ui/core/Checkbox"; // TODO: Will add to save credentials, longer cookie?!
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 // import Box from "@material-ui/core/Box";
@@ -36,7 +37,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = () => {
+const Login = props => {
+  const { cookies } = props;
   const classes = useStyles(); //material ui class
   const [values, setValues] = useState({ email: "", password: "" }); //hook to hold values of email & pw
 
@@ -45,7 +47,20 @@ const Login = () => {
     setValues({ ...values, [name]: value });
   };
   const handleSubmit = e => {
-    //TODO: handle submit
+    e.preventDefault();
+    console.log(values);
+    axios
+      .post("http://localhost:5555/api/auth/login", {
+        ...values,
+        credentials: "same-origin"
+      })
+      .then(res => {
+        cookies.set("entDeviceToken", res.data.token, { path: "/" });
+        //TODO: Once completed, push user to dashboard
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -56,7 +71,7 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
