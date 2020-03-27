@@ -1,4 +1,8 @@
-import { VIEW_DEVICES, VIEW_REQUESTS, FAILURE} from './index';
+import {
+  FETCH_DEVICES_START,
+  FETCH_DEVICES_SUCCESS,
+  FETCH_DEVICES_FAIL
+} from "../actions";
 
 const initialState = {
   requests: [],
@@ -6,21 +10,21 @@ const initialState = {
   error: ""
 };
 
-export const navReducer = (state = initialState, action) => {
+export const deviceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case VIEW_DEVICES:
+    case FETCH_DEVICES_START:
       return {
         ...state,
         devices: action.payload,
         error: ""
       };
-    case VIEW_REQUESTS:
+    case FETCH_DEVICES_SUCCESS:
       return {
         ...state,
         requests: action.payload,
         error: ""
       };
-    case FAILURE:
+    case FETCH_DEVICES_FAIL:
       return {
         ...state,
         error: action.payload

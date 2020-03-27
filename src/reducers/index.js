@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./userReducer";
-import { navReducer } from "./navReducer";
+import { authReducer } from "./authReducer";
+import { deviceReducer } from "./deviceReducer";
 
-const rootReducer = combineReducers({ userReducer, navReducer });
+const rootReducer = combineReducers({ authReducer, deviceReducer });
 
 export default rootReducer;
