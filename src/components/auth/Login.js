@@ -43,8 +43,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
-  // console.log(props);
-  // const { cookies, login } = props;
   const classes = useStyles(); //material ui class
   const formik = useFormik({
     initialValues: {
@@ -68,7 +66,7 @@ const Login = props => {
           //TODO: Once completed, push user to dashboard
         })
         .catch(error => {
-          console.log(error);
+          console.log({ message: error });
           //TODO: Render error Div
         });
     }

@@ -103,8 +103,6 @@ const SignupForm = props => {
         password: password
       };
 
-      alert(JSON.stringify(signUpInfo, null, 2));
-      // values = JSON.stringify(values);
       props
         .signUp(signUpInfo)
         .then(res => {
@@ -112,7 +110,7 @@ const SignupForm = props => {
           //TODO: Once completed, push user to dashboard
         })
         .catch(err => {
-          console.log(err);
+          console.log({ message: err });
         });
     }
   });
