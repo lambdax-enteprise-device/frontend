@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { login } from "../../actions";
 
+// UI Imports
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -40,9 +43,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
-  const { cookies } = props;
+  // console.log(props);
+  // const { cookies, login } = props;
   const classes = useStyles(); //material ui class
-  // const [values, setValues] = useState({ email: "", password: "" }); //hook to hold values of email & pw
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -58,13 +61,10 @@ const Login = props => {
         .required("This field is required")
     }),
     onSubmit: values => {
-      axios
-        .post("http://localhost:5555/api/auth/login", {
-          ...values,
-          credentials: "same-origin"
-        })
+      props
+        .login(values)
         .then(res => {
-          cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
           //TODO: Once completed, push user to dashboard
         })
         .catch(error => {
@@ -73,28 +73,6 @@ const Login = props => {
         });
     }
   });
-
-  // const handleChange = e => {
-  //   const { name, value } = e.target;
-  //   setValues({ ...values, [name]: value });
-  // };
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   console.log(values);
-  //   axios
-  //     .post("http://localhost:5555/api/auth/login", {
-  //       ...values,
-  //       credentials: "same-origin"
-  //     })
-  //     .then(res => {
-  //       cookies.set("entDeviceToken", res.data.token, { path: "/" });
-  //       //TODO: Once completed, push user to dashboard
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //       //TODO: Render error Div
-  //     });
-  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -145,6 +123,7 @@ const Login = props => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
+          {/* // TODO: Submit button needs to be clicked twice if cursor is inside PW field */}
           <Button
             type="submit"
             fullWidth
@@ -167,4 +146,12 @@ const Login = props => {
   );
 };
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    isLoggingIn: state.authReducer.isLoggingIn,
+    error: state.authReducer.error,
+    user: state.authReducer.user
+  };
+};
+
+export default connect(mapStateToProps, { login })(Login);

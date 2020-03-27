@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { signUp } from "../../actions";
 
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -39,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignupForm = () => {
+const SignupForm = props => {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
@@ -103,13 +105,11 @@ const SignupForm = () => {
 
       alert(JSON.stringify(signUpInfo, null, 2));
       // values = JSON.stringify(values);
-      axios
-        .post(
-          "http://enterprise-devices.herokuapp.com/api/auth/signup",
-          signUpInfo
-        )
+      props
+        .signUp(signUpInfo)
         .then(res => {
-          console.log(res);
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard
         })
         .catch(err => {
           console.log(err);
@@ -240,4 +240,12 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+const mapStateToProps = state => {
+  return {
+    isLoggingIn: state.authReducer.isLoggingIn,
+    error: state.authReducer.error,
+    user: state.authReducer.user
+  };
+};
+
+export default connect(mapStateToProps, { signUp })(SignupForm);
