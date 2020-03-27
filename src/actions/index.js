@@ -16,10 +16,6 @@ export const SUBMIT_REQUESTS_START = "SUBMIT_REQUESTS_START";
 export const SUBMIT_REQUESTS_SUCCESS = "SUBMIT_REQUESTS_SUCCESS";
 export const SUBMIT_REQUESTS_FAIL = "SUBMIT_REQUESTS_FAIL";
 
-export const LOGOUT_START = "LOGOUT_START";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAIL = "LOGOUT_FAIL";
-
 export const getDevices = () => dispatch => {
   dispatch({ type: FETCH_DEVICES_START });
   axios
