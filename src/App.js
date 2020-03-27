@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+// for styling svg on landing
 import styled from 'styled-components';
 import { ReactComponent as DeviceImage } from "./assets/devices.svg"
 
@@ -14,6 +15,7 @@ import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 
+// test styling for landing
 const StyledImage = styled.div`
   border: 2px solid palevioletred;
   
@@ -23,6 +25,7 @@ function App(props) {
   return (
     <div className="App">
 
+      {/* SVG image component for landing */}
       <StyledImage>
         <DeviceImage />
       </StyledImage>
