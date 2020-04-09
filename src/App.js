@@ -11,6 +11,7 @@ import './App.css';
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
+import Landing from "./Landing";
 
 
 function App(props) {
@@ -21,7 +22,7 @@ function App(props) {
           <NavBar />
         </header> */}
       <Switch>
-        <Route path="/" exact />
+        <Route path="/" exact component={Landing} />
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
         <Route
           path="/login"

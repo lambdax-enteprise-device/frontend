@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: nowrap;
-  padding-top: 100px;
 }
 
 .App-logo {

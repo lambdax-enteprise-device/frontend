@@ -51,7 +51,7 @@ export default function Landing() {
         <div className={classes.paper}>
           
           <Typography component="h1" variant="h5">
-            Now you can easily log and track all your organizations devices
+            Create the perfect hardware asset register to organize all your employees and which hardware they have, across departments and geographic locations
           </Typography>
           <form className={classes.form} noValidate>
             
