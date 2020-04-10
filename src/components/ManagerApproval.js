@@ -19,7 +19,9 @@ const ManagerApproval = () => {
                 {requestList(['Macbook', 'Blackberry', 'Macbook Air', 'Windows'])}
             </div>
 
-            <div className="approval-form">
+            <form className="approval-form" 
+            // submit={}
+            >
                 <h2>Employee Requests (Pending Manager's Approval) </h2>
                 <div className="manager-label-section">
                     <label>Device Requested</label>
@@ -30,7 +32,8 @@ const ManagerApproval = () => {
                     <label>Approved?</label>
                     <input type="checkbox"></input>
                 </div>
-            </div>
+                <button>Submit</button>
+            </form>
         </>
     )
 }

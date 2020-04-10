@@ -27,10 +27,10 @@ function App() {
           <NavBar />
         </header>
         <Switch>
-          {/* <Route path="/" exact /> */}
+          <Route path="/" exact />
           <Route exact path="/login" component={Login} />
-          <Route path="/approval" component={ManagerApproval} />
           <Route exact path="/registration" component={Registration} />
+          <Route path="/approval" component={ManagerApproval} />
           <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </Router>
