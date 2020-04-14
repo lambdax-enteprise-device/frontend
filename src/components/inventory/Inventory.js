@@ -10,10 +10,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   root: {
     marginTop: 10,
-    marginBottom: 5
+    marginBottom: 5 
   }
 }));
-
+  
 const Inventory = () => {
   const [inventory, setInventory] = useState([]);
   const [filteredInventory, setFilteredInventory] = useState([]);

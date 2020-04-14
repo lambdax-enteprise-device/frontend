@@ -11,6 +11,8 @@ import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 import Inventory from "./components/inventory/Inventory"
+import AddDevice from "./components/inventory/AddDevice"
+import RemoveDevice from "./components/inventory/RemoveDevice"
 
 function App(props) {
   return (
@@ -37,6 +39,13 @@ function App(props) {
           path="/inventory"
           render={(...props) => <Inventory cookies={props.cookies} />}
           />
+          <Route
+          path="/add-device"
+          render={(...props) => <AddDevice cookies={props.cookies} />}
+          />
+          <Route
+          path="/remove-device"
+          render={(...props) => <RemoveDevice cookies={props.cookies} />} />
       </Switch>
     </div>
   );
