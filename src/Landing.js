@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "97% 97%",
+    backgroundSize: "90%",
     backgroundPosition: "center",
   },
   paper: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Landing() {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -56,16 +58,16 @@ export default function Landing() {
           <form className={classes.form} noValidate>
             
             <Button
+              onClick={() => history.push("/login")}
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
             >
-              Get Started
+              Login or Sign Up
             </Button>
-            
-            
+    
           </form>
         </div>
       </Grid>
