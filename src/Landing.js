@@ -23,10 +23,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
   },
   paper: {
-    margin: theme.spacing(20, 4),
+    margin: theme.spacing(20, 10),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    textAlign: "center",
+  },
+  content: {
+    marginBottom: theme.spacing(10),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -34,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(20),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(0, 15),
+    width: "50%",
   },
 }));
 
@@ -52,15 +56,20 @@ export default function Landing() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           
-          <Typography component="h1" variant="h5">
-            Create the perfect hardware asset register to organize all your employees and which hardware they have, across departments and geographic locations
+          <Typography className={classes.content} component="h1" variant="h5">
+            Create the perfect hardware asset register to organize all your employees and the hardware they've been assigned
+          </Typography>
+          <Typography className={classes.content} component="h1" variant="h5">
+            Track hardware assignments across departments and geographic locations
+          </Typography>
+          <Typography className={classes.content} component="h1" variant="h5">
+            Minimize expenditures due to lost or missing devices
           </Typography>
           <form className={classes.form} noValidate>
             
             <Button
               onClick={() => history.push("/login")}
               type="submit"
-              fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
