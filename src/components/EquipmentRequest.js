@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import "./equipmentRequest.scss"
 
 
 const EquipmentRequest = (props) => {
-    const [ request , SetRequest ] = useState({name:"",employee:"",email:""})
+    const [ request , SetRequest ] = useState({request_id:"",device_id:""})
 
     const handleChange = (e) => {
         SetRequest({...request, [e.target.name] : e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("oh yeahhh")
     }
 
     console.log(request)
@@ -14,35 +20,27 @@ const EquipmentRequest = (props) => {
 
     return (
         <div>
-            <form>
+            <h2>Request Items</h2>
+            <form onSubmit={handleSubmit}>
                 <label>
-                    Equipment Name
+                    Request ID
                     <input 
-                        type="text"
-                        name="name"
+                        type="number"
+                        name="request_id"
                         onChange={handleChange}
                         value={request.name}
                     />
                 </label>
                 <label>
-                    employee Name
+                    Device ID
                     <input 
-                        type="text"
-                        name="employee"
+                        type="number"
+                        name="device_id"
                         onChange={handleChange}
                         value={request.employee}
                     />
                 </label>
-                <label>
-                    Email
-                    <input 
-                        type="email"
-                        name="email"
-                        onChange={handleChange}
-                        value={request.email}
-                    />
-                </label>
-                
+                <button>Submit</button>
             </form>
         </div>
     )
