@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
   },
   paper: {
-    margin: theme.spacing(20, 10),
+    margin: theme.spacing(10, 10),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
   content: {
     marginBottom: theme.spacing(10),
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  title: {
+    fontWeight: 700,
+    marginBottom: theme.spacing(10),
+    fontSize: 40,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -53,9 +54,11 @@ export default function Landing() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} square>
         <div className={classes.paper}>
-          
+          <Typography className = {classes.title} variant="h4" color="primary">
+            Enterprise Device Tracker
+          </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
             Create the perfect hardware asset register to organize all your employees and the hardware they've been assigned
           </Typography>
