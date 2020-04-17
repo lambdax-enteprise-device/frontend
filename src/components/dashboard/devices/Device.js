@@ -7,10 +7,10 @@ const Device = props => {
   console.log(props, "Single device props");
   return (
     <div>
-      <TableRow>
-        <TableCell>{props.item.id}</TableCell>
-        <TableCell>{props.item.company_id}</TableCell>
-      </TableRow>
+      <TableCell scope="row" align="right">
+        {props.item.id}
+      </TableCell>
+      <TableCell align="right">{props.item.company_id}</TableCell>
     </div>
   );
 };

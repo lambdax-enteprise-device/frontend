@@ -5,7 +5,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
-import Device from "./Device.js";
+
+//* This was for a component that listed TableCells after mapping over relevant data. No longer using it, but may need to in future.
+//import Device from "./Device.js";
 
 const useStyles = makeStyles(theme => ({
   seeMore: {
@@ -15,11 +17,9 @@ const useStyles = makeStyles(theme => ({
 
 const Devices = props => {
   const classes = useStyles();
-  console.log("Devices comp props,", props.devices);
-  console.log("Finding path", props.devices.devices.data);
 
-  let relevant = props.devices.devices.data;
-  console.log(relevant, "relevant");
+  let devicesData = props.devices.devices.data;
+  // console.log(relevant, "relevant");
 
   // relevant.map(item => {
   //   console.log(item);
@@ -37,11 +37,14 @@ const Devices = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* Need another component here to map over, display in the table body*/}
-
-          {(relevant || []).map(item => {
-            return <Device item={item} />;
-          })}
+          {(devicesData || []).map(item => (
+            <TableRow>
+              <TableCell>{item.id}</TableCell>
+              <TableCell>{item.company_id}</TableCell>
+              <TableCell>{item.device_type_id}</TableCell>
+              <TableCell>{item.serial_number}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
@@ -51,8 +54,8 @@ const Devices = props => {
 export default Devices;
 
 /*
-  {relevant.map(item => {
-            return <Device item={item} />;
-          })}
+   {(relevant || []).map(item => {
+              return <Device item={item} />;
+            })}
 
 */

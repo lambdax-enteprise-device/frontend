@@ -57,18 +57,6 @@ const Dashboard = props => {
       });
   }, []);
 
-  // function getDevices() {
-  //   axios
-  //     .get("http://enterprise-devices.herokuapp.com/api/devices")
-  //     .then(res => {
-  //       console.log(res, "get RES");
-  //       setDevices({ devices: res });
-  //     })
-  //     .catch(err => {
-  //       console.log("GET err,", err);
-  //     });
-  // }
-
   console.log(devices, "devices state");
   return (
     <div className={classes.root}>
