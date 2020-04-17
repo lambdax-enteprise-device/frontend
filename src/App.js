@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
 import { withCookies } from "react-cookie";
 
 // import NavBar from "./components/NavBar";
@@ -10,15 +9,20 @@ import { withCookies } from "react-cookie";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
+import Landing from "./Landing";
+
 
 function App(props) {
   return (
     <div className="App">
+    
       {/* <header>
           <NavBar />
         </header> */}
+
       <Switch>
-        <Route path="/" exact />
+        <Route path="/" exact component={Landing} />
+        
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
         <Route
           path="/login"
