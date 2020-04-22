@@ -60,7 +60,7 @@
   "bugs": {
     "url": "https://github.com/lambdax-enteprise-device/frontend/issues"
   },
-  "homepage": "https://github.com/lambdax-enteprise-device/frontend#readme",
+  "homepage": "https://github.com/lambdax-enteprise-device/frontend/",
   "resolutions": {
     "@babel/preset-env": "7.5.5"
   }
