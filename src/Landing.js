@@ -76,8 +76,18 @@ export default function Landing() {
               color="primary"
               className={classes.submit}
             >
-              Login or Sign Up
+              Login
             </Button>
+            <hr/>
+            <Button 
+              onClick={()=> history.push("/signup")}
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              >
+                SignUp
+              </Button>
     
           </form>
         </div>
