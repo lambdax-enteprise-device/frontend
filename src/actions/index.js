@@ -19,7 +19,7 @@ export const SUBMIT_REQUESTS_FAIL = "SUBMIT_REQUESTS_FAIL";
 export const getDevices = () => dispatch => {
   dispatch({ type: FETCH_DEVICES_START });
   axios
-    .get("http://enterprise-devices.herokuapp.com/api/devices")
+    .get("http://localhost:4545/api/devices")
     .then(response => {
       dispatch({ type: FETCH_DEVICES_SUCCESS, payload: response.data });
     })

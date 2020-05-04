@@ -7,6 +7,6 @@ export const axiosWithAuth = token => {
       Authorization: `Bearer ${token}`
     },
     // baseURL: process.env.REACT_APP_BASEURL
-    baseURL: process.env.REACT_APP_LOCALURL
+    baseURL: 'http://localhost:4545'
   });
 };

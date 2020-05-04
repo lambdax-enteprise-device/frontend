@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {axiosWithAuth} from '../components/utils/axiosWithAuth'
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -10,8 +10,8 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
-  axios
-    .post("http://localhost:5555/api/auth/login", creds)
+  axiosWithAuth()
+    .post("/api/users", creds)
     .then(response => {
       dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
       return true;
@@ -24,8 +24,8 @@ export const login = creds => dispatch => {
 export const signUp = userInfo => dispatch => {
   console.log("userInfo", userInfo);
   dispatch({ type: SIGNUP_START });
-  axios
-    .post("http://localhost:5555/api/auth/signup", userInfo)
+  axiosWithAuth
+    .post("/api/users", userInfo)
     .then(response => {
       dispatch({ type: SIGNUP_SUCCESS, payload: response.data.user });
       return true;
