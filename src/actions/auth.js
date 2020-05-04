@@ -11,9 +11,10 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
-    .post("/api/users", creds)
+    .post("/api/auth/login", creds)
     .then(response => {
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
+    
+      dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
       return true;
     })
     .catch(err => {
@@ -24,12 +25,13 @@ export const login = creds => dispatch => {
 export const signUp = userInfo => dispatch => {
   console.log("userInfo", userInfo);
   dispatch({ type: SIGNUP_START });
-  axiosWithAuth
-    .post("/api/users", userInfo)
+  axiosWithAuth()
+    .post("/api/auth/signup", userInfo)
     .then(response => {
       dispatch({ type: SIGNUP_SUCCESS, payload: response.data.user });
       return true;
     })
+    .then(()=>{userInfo.history.push('/login')})
     .catch(err => {
       console.log(err);
       dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
