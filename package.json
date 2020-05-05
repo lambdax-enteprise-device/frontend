@@ -23,7 +23,7 @@
     "yup": "^0.28.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm install -g serve && serve -s build",
     "build": "react-scripts build",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "eject": "react-scripts eject",
