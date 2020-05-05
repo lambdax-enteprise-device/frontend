@@ -60,15 +60,17 @@ const Login = props => {
     }),
     onSubmit: values => {
       const {login,response,error} = props
-      
-        login(values,response,error)
-        if (error) {console.log(error)}
-         return (response => {
-           console.log(response)
-          response.cookies.set("entDeviceToken", response.data.token, { path: "/" });
+       
+        login(values,(response,error =>{
+        if(response) {
+            console.log(response)
+           response.cookies.set("entDeviceToken", response.data.token, { path: "/" });
+        }
+        return error => {console.log(error)}
+     
           //TODO: Once completed, push user to dashboard
-        });
-  
+        }
+        ))
     }
   });
 

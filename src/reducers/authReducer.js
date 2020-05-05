@@ -1,3 +1,4 @@
+import createBrowserHistory from '../utils/History'
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -9,7 +10,8 @@ import {
 const initialState = {
   isLoggingIn: false,
   error: null,
-  user: {}
+  user: {token:''},
+  history:[]
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -20,7 +22,8 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {}
+        user: {token:''},
+        history:[createBrowserHistory]
       };
     case LOGIN_SUCCESS:
       return {
@@ -32,7 +35,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: false,
-        user: {},
+        user: {token:''},
         error: action.payload
       };
     case SIGNUP_START:
