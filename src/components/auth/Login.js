@@ -59,16 +59,16 @@ const Login = props => {
         .required("This field is required")
     }),
     onSubmit: values => {
-      props
-        .login(values)
-        .then(res => {
-          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+      const {login,response,error} = props
+      
+        login(values,response,error)
+        if (error) {console.log(error)}
+         return (response => {
+           console.log(response)
+          response.cookies.set("entDeviceToken", response.data.token, { path: "/" });
           //TODO: Once completed, push user to dashboard
-        })
-        .catch(error => {
-          console.log({ message: error });
-          //TODO: Render error Div
         });
+  
     }
   });
 

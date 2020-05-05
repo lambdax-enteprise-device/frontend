@@ -13,9 +13,9 @@ export const login = creds => dispatch => {
   axiosWithAuth()
     .post("/api/auth/login", creds)
     .then(response => {
-    
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
-      return true;
+     console.log(response)
+       dispatch({ type: LOGIN_SUCCESS, payload: {'token': response.data.token} });
+      return response.data;
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAIL, payload: err.response.data.message });
