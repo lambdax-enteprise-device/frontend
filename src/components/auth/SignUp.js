@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { signUp } from "../../actions";
 
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -39,19 +41,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignupForm = () => {
+const SignupForm = props => {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
-      password: "12345678",
-      confirmPassword: "12345678",
-      companyName: "My Company",
-      title: "IT Manager",
-      firstName: "Joel",
-      lastName: "Perez",
-      email: "joel@joelperez.dev",
-      confirmEmail: "joel@joelperez.dev"
+      password: "",
+      confirmPassword: "",
+      companyName: "",
+      title: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      confirmEmail: ""
     },
+    validateOnChange: false, //* To prevent onChange validation so errors don't pop until onBlur
     validationSchema: Yup.object({
       password: Yup.string()
         .min(8, "Must be 8 characters or more")
@@ -81,7 +84,6 @@ const SignupForm = () => {
         .oneOf([Yup.ref("email"), null], "Email addresses must match")
       // TODO: Require complex passwords
     }),
-    // TODO: Update to only validate during onBlur events
     onSubmit: values => {
       //* Formatting request object for submission
       const {
@@ -101,18 +103,14 @@ const SignupForm = () => {
         password: password
       };
 
-      alert(JSON.stringify(signUpInfo, null, 2));
-      // values = JSON.stringify(values);
-      axios
-        .post(
-          "http://enterprise-devices.herokuapp.com/api/auth/signup",
-          signUpInfo
-        )
+      props
+        .signUp(signUpInfo)
         .then(res => {
-          console.log(res);
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard
         })
         .catch(err => {
-          console.log(err);
+          console.log({ message: err });
         });
     }
   });
@@ -131,23 +129,24 @@ const SignupForm = () => {
             id="first-name"
             required
             onChange={formik.handleChange}
+            error={
+              formik.touched.firstName && formik.errors.firstName ? true : false
+            }
+            helperText={formik.errors.firstName}
             {...formik.getFieldProps("firstName")}
           />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <div>{formik.errors.firstName}</div>
-          ) : null}
-          {/* <label htmlFor="lastName">Last Name</label> */}
           <TextField
             label="Last Name"
             name="lastName"
             type="text"
             id="last-name"
             required
+            error={
+              formik.touched.lastName && formik.errors.lastName ? true : false
+            }
+            helperText={formik.errors.lastName}
             {...formik.getFieldProps("lastName")}
           />
-          {formik.touched.lastName && formik.errors.lastName ? (
-            <div>{formik.errors.lastName}</div>
-          ) : null}
           <TextField
             label="Company Name"
             name="companyName"
@@ -155,6 +154,12 @@ const SignupForm = () => {
             id="company-name"
             required
             onChange={formik.handleChange}
+            error={
+              formik.touched.companyName && formik.errors.companyName
+                ? true
+                : false
+            }
+            helperText={formik.errors.companyName}
             {...formik.getFieldProps("companyName")}
           />
           <TextField
@@ -164,56 +169,60 @@ const SignupForm = () => {
             id="title"
             required
             onChange={formik.handleChange}
+            error={formik.touched.title && formik.errors.title ? true : false}
+            helperText={formik.errors.title}
             {...formik.getFieldProps("title")}
           />
-
           <TextField
             label="Email"
             name="email"
             type="email"
             id="email"
             required
+            error={formik.touched.email && formik.errors.email ? true : false}
+            helperText={formik.errors.email}
             {...formik.getFieldProps("email")}
           />
-          {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
-          ) : null}
-
           <TextField
             label="Confirm Email"
             name="confirmEmail"
             type="email"
             id="email-confirm"
             required
+            error={
+              formik.touched.confirmEmail && formik.errors.confirmEmail
+                ? true
+                : false
+            }
+            helperText={formik.errors.confirmEmail}
             {...formik.getFieldProps("confirmEmail")}
           />
-          {formik.touched.confirmEmail && formik.errors.confirmEmail ? (
-            <div>{formik.errors.confirmEmail}</div>
-          ) : null}
-
           <TextField
             label="Password"
             name="password"
             type="password"
             id="password"
             required
+            error={
+              formik.touched.password && formik.errors.password ? true : false
+            }
+            helperText={formik.errors.password}
             {...formik.getFieldProps("password")}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-          ) : null}
-
           <TextField
             label="Confirm Password"
             name="confirmPassword"
             type="password"
             id="password"
             required
+            error={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+                ? true
+                : false
+            }
+            helperText={formik.errors.confirmPassword}
             {...formik.getFieldProps("confirmPassword")}
           />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div>{formik.errors.confirmPassword}</div>
-          ) : null}
           <Button
             type="submit"
             className={classes.submit}
@@ -229,4 +238,12 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+const mapStateToProps = state => {
+  return {
+    isLoggingIn: state.authReducer.isLoggingIn,
+    error: state.authReducer.error,
+    user: state.authReducer.user
+  };
+};
+
+export default connect(mapStateToProps, { signUp })(SignupForm);
