@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { login } from "../../actions";
+
+// UI Imports
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from "@material-ui/core/Checkbox"; // TODO: Will add to save credentials, longer cookie?!
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 // import Box from "@material-ui/core/Box";
@@ -36,17 +42,35 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = () => {
+const Login = props => {
   const classes = useStyles(); //material ui class
-  const [values, setValues] = useState({ email: "", password: "" }); //hook to hold values of email & pw
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-  const handleSubmit = e => {
-    //TODO: handle submit
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validateOnChange: false, //* To prevent onChange validation so errors don't pop until onBlur
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("This field is required"),
+      password: Yup.string()
+        .min(8, "Password must be 8 characters or more")
+        .required("This field is required")
+    }),
+    onSubmit: values => {
+      props
+        .login(values)
+        .then(res => {
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard
+        })
+        .catch(error => {
+          console.log({ message: error });
+          //TODO: Render error Div
+        });
+    }
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -56,7 +80,11 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          onSubmit={formik.handleSubmit}
+          noValidate
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,7 +95,10 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={handleChange}
+            onChange={formik.handleChange}
+            error={formik.touched.email && formik.errors.email ? true : false}
+            helperText={formik.errors.email}
+            {...formik.getFieldProps("email")}
           />
           <TextField
             variant="outlined"
@@ -79,12 +110,18 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={handleChange}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.password && formik.errors.password ? true : false
+            }
+            helperText={formik.errors.password}
+            {...formik.getFieldProps("password")}
           />
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
+          {/* // TODO: Submit button needs to be clicked twice if cursor is inside PW field */}
           <Button
             type="submit"
             fullWidth
@@ -107,4 +144,12 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    isLoggingIn: state.authReducer.isLoggingIn,
+    error: state.authReducer.error,
+    user: state.authReducer.user
+  };
+};
+
+export default connect(mapStateToProps, { login })(Login);
