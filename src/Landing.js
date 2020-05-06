@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   content: {
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
   },
   title: {
     fontWeight: 700,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
   },
   submit: {
-    margin: theme.spacing(0, 15),
+    margin: theme.spacing(2, 15),
     width: "50%",
   },
 }));
@@ -55,20 +55,21 @@ export default function Landing() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} square>
         <div className={classes.paper}>
-          <Typography className = {classes.title} variant="h4" color="primary">
+          <Typography className={classes.title} variant="h4" color="primary">
             Enterprise Device Tracker
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
-            Create the perfect hardware asset register to organize all your employees and the hardware they've been assigned
+            Create the perfect hardware asset register to organize all your
+            employees and the hardware they've been assigned
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
-            Track hardware assignments across departments and geographic locations
+            Track hardware assignments across departments and geographic
+            locations
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
             Minimize expenditures due to lost or missing devices
           </Typography>
           <form className={classes.form} noValidate>
-            
             <Button
               onClick={() => history.push("/login")}
               type="submit"
