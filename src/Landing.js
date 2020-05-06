@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   content: {
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
   },
   title: {
     fontWeight: 700,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
   },
   submit: {
-    margin: theme.spacing(0, 15),
+    margin: theme.spacing(2, 15),
     width: "50%",
   },
 }));
