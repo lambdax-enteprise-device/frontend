@@ -24,13 +24,10 @@ function App(props) {
         <Route path="/" exact component={Landing} />
         
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
-        <Route
-          path="/login"
-          render={(...props) => <Login cookies={props.cookies} />}
-        />
+        <Route path="/login" render={() => <Login cookies={props.cookies} />} />
         <Route
           path="/signup"
-          render={(...props) => <SignupForm cookies={props.cookies} />}
+          render={() => <SignupForm cookies={props.cookies} />}
         />
         <Route
           path="/dashboard"
