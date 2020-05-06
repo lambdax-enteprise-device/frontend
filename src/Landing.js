@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   content: {
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
   },
   title: {
     fontWeight: 700,
@@ -42,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(0, 15),
     width: "50%",
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
 }));
 
