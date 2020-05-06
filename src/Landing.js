@@ -55,20 +55,21 @@ export default function Landing() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} square>
         <div className={classes.paper}>
-          <Typography className = {classes.title} variant="h4" color="primary">
+          <Typography className={classes.title} variant="h4" color="primary">
             Enterprise Device Tracker
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
-            Create the perfect hardware asset register to organize all your employees and the hardware they've been assigned
+            Create the perfect hardware asset register to organize all your
+            employees and the hardware they've been assigned
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
-            Track hardware assignments across departments and geographic locations
+            Track hardware assignments across departments and geographic
+            locations
           </Typography>
           <Typography className={classes.content} component="h1" variant="h5">
             Minimize expenditures due to lost or missing devices
           </Typography>
           <form className={classes.form} noValidate>
-            
             <Button
               onClick={() => history.push("/login")}
               type="submit"
@@ -76,9 +77,18 @@ export default function Landing() {
               color="primary"
               className={classes.submit}
             >
-              Login or Sign Up
+              Login
             </Button>
-    
+            <hr/>
+            <Button 
+              onClick={() => history.push("/signup")}
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+            Sign Up
+            </Button>
           </form>
         </div>
       </Grid>
