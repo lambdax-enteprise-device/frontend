@@ -1,41 +1,41 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import './App.css';
+import { Route, Switch } from "react-router-dom";
+import { withCookies } from "react-cookie";
 
-import NavBar from "./components/NavBar";
-import Profile from "./components/Profile";
-import PrivateRoute from "./components/PrivateRoute";
-import Registration from "./components/Login/Registration"
-import Login from "./components/Login/Login"
+// import NavBar from "./components/NavBar";
+// import Profile from "./components/Profile";
+// import PrivateRoute from "./components/PrivateRoute";
 
-import history from "./components/utils/history";
-
-import { useAuth0 } from "./components/auth/react-auth0-spa";
+import Login from "./components/auth/Login";
+import SignupForm from "./components/auth/SignUp";
+import Dashboard from "./components/dashboard/Dashboard";
+import Landing from "./Landing";
 import ManagerApproval from "./components/ManagerApproval";
 
-function App() {
-  const { loading } = useAuth0();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+function App(props) {
   return (
     <div className="App">
-      <Router history={history}>
-        <header>
+    
+      {/* <header>
           <NavBar />
-        </header>
-        <Switch>
-          <Route path="/" exact />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/registration" component={Registration} />
-          <Route path="/approval" component={ManagerApproval} />
-          <PrivateRoute path="/profile" component={Profile} />
-        </Switch>
-      </Router>
+        </header> */}
+
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        
+        {/* <PrivateRoute path="/profile" component={Profile} /> */}
+        <Route path="/login" render={() => <Login cookies={props.cookies} />} />
+        <Route
+          path="/signup"
+          render={() => <SignupForm cookies={props.cookies} />}
+        />
+        <Route
+          path="/dashboard"
+          render={(...props) => <Dashboard cookies={props.cookies} />}
+        />
+      </Switch>
     </div>
   );
 }
 
-export default App;
+export default withCookies(App);

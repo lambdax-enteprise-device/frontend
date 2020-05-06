@@ -1,8 +1,3 @@
-//look at the DB diagram, there's a schema pinned in the channel
-//next, try to pull a list of devices from the backend and display
-//  ^ the Slack channel has a Heroku link with endpoints that I can hit
-
-
 import React from 'react';
 
 
