@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { login } from "../../actions";
-
+import History from '../../utils/History'
 // UI Imports
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -18,6 +18,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -43,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
+  
   const classes = useStyles(); //material ui class
   const formik = useFormik({
     initialValues: {
@@ -59,12 +61,14 @@ const Login = props => {
         .required("This field is required")
     }),
     onSubmit: values => {
-      const {login,response,error} = props
+
+      const {cookies,login,error} = props
        
-        login(values,(response,error =>{
-        if(response) {
-            console.log(response)
-           response.cookies.set("entDeviceToken", response.data.token, { path: "/" });
+        login(values,(props.response,error =>{
+          History.push(props.history)
+        if(props.response) {
+              console.log(props.response)    
+           cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
         }
         return error => {console.log(error)}
      

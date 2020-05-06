@@ -16,9 +16,9 @@ export const login =  creds => dispatch => {
     .post("/api/auth/login", creds)
     .then(response => {
 
-     console.log(History)
-      dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token,'history':History.push("/dashboard",dispatch.type)}})
-    return History.push('/dashboard',dispatch.type)
+    
+    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token,'history':[History.location.pathname]}})
+    return History.push("/dashboard")
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAIL, payload: err.message });
@@ -37,6 +37,6 @@ export const signUp = userInfo => dispatch => {
     .then(()=>{userInfo.history.push('/login')})
     .catch(err => {
       console.log(err);
-      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
+      dispatch({ type: SIGNUP_FAIL, payload: err.message });
     });
 };
