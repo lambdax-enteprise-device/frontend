@@ -40,10 +40,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
   },
   submit: {
-    margin: theme.spacing(0, 15),
+    margin: theme.spacing(2, 15),
     width: "50%",
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2),
   },
 }));
 
