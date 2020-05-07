@@ -4,7 +4,20 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import { TextField, Button, Grid} from "@material-ui/core";
 
+import { makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        width: "15em",
+        
+    }
+}))
+
+
 const RemoveDevice = () => {
+    const classes = useStyles();
     const formik = useFormik({
         initialValues: {
             device_id: 1
@@ -33,8 +46,14 @@ const RemoveDevice = () => {
     })
     return(
         <div>
+        <Grid
+        container
+        direction='column'
+        justify='center'
+        alignItems='center'
+        >
         <p>Enter the DeviceID you want to remove</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className={classes.form}>
             <TextField 
             label="Device ID"
             name="Device ID"
@@ -49,6 +68,7 @@ const RemoveDevice = () => {
             color="primary"
             >Submit</Button>
         </form>
+        </Grid>
         </div>
 
     )
