@@ -33,6 +33,7 @@ function App(props) {
           path="/dashboard"
           render={(...props) => <Dashboard cookies={props.cookies} />}
         />
+        <Route path="/approval" render={() => <ManagerApproval cookies={props.cookies} />} />
       </Switch>
     </div>
   );
