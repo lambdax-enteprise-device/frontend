@@ -10,7 +10,7 @@ import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
 import Landing from "./Landing";
-
+import ManagerApproval from "./components/ManagerApproval";
 
 function App(props) {
   return (
@@ -33,6 +33,7 @@ function App(props) {
           path="/dashboard"
           render={(...props) => <Dashboard cookies={props.cookies} />}
         />
+        <Route path="/approval" render={() => <ManagerApproval cookies={props.cookies} />} />
       </Switch>
     </div>
   );

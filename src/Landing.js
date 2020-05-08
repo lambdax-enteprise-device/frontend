@@ -86,9 +86,9 @@ export default function Landing() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              >
-                SignUp
-              </Button>
+            >
+            Sign Up
+            </Button>
     
           </form>
         </div>
