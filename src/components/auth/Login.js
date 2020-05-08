@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { login } from "../../actions";
-import History from '../../utils/History'
+import History from '../utils/History'
 // UI Imports
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -67,7 +67,7 @@ const Login = props => {
         login(values,(props.response,error =>{
           History.push(props.history)
         if(props.response) {
-              console.log(props.response)    
+               
            cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
         }
         return error => {console.log(error)}
