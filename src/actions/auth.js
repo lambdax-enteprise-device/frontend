@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import {axiosWithAuth} from '../components/utils/axiosWithAuth'
+import createBrowserHistory from '../components/utils/History'
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -8,33 +9,32 @@ export const SIGNUP_START = "SIGNUP_START";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
-const loginUrl = process.env.REACT_APP_LOGIN_URL;
-const signupUrl = process.env.REACT_APP_SIGNUP_URL;
-
-export const login = creds => dispatch => {
+export const login =  creds => dispatch => {
+   const History = createBrowserHistory
   dispatch({ type: LOGIN_START });
-  axios
-    .post(loginUrl, creds)
+  axiosWithAuth()
+    .post("/api/auth/login", creds)
     .then(response => {
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
-      return true;
+    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token,'history':[History.location.pathname]}})
+    return History.push("/dashboard")
     })
     .catch(err => {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message });
+      dispatch({ type: LOGIN_FAIL, payload: err.message });
     });
 };
 
 export const signUp = userInfo => dispatch => {
-  console.log("userInfo", userInfo);
+  const History = createBrowserHistory
   dispatch({ type: SIGNUP_START });
-  axios
-    .post(signupUrl, userInfo)
-    .then((response) => {
-      dispatch({ type: SIGNUP_SUCCESS, payload: response.data.user });
-      return true;
+  axiosWithAuth()
+    .post("/api/auth/signup", userInfo)
+    .then(response => {
+      dispatch({ type: SIGNUP_SUCCESS, payload: response.data});
+      return History.push("/dashboard");
     })
-    .catch((err) => {
+    
+    .catch(err => {
       console.log(err);
-      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
+      dispatch({ type: SIGNUP_FAIL, payload: err.message });
     });
 };

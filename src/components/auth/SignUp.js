@@ -86,6 +86,7 @@ const SignupForm = props => {
     }),
     onSubmit: values => {
       //* Formatting request object for submission
+      const {cookies,signUp,error} = props
       const {
         firstName,
         lastName,
@@ -103,10 +104,10 @@ const SignupForm = props => {
         password: password
       };
 
-      props
-        .signUp(signUpInfo)
+      signUp(signUpInfo)
         .then(res => {
-          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          History.push(props.history)
+          cookies.set("entDeviceToken", res.data.token, { path: "/dashboard" });
           //TODO: Once completed, push user to dashboard
         })
         .catch(err => {

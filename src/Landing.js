@@ -81,7 +81,7 @@ export default function Landing() {
             </Button>
             <hr/>
             <Button 
-              onClick={() => history.push("/signup")}
+              onClick={()=> history.push("/signup")}
               type="submit"
               variant="contained"
               color="primary"
