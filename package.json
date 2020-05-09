@@ -24,7 +24,6 @@
     "yup": "^0.28.1"
   },
   "scripts": {
-
     "dev": "react-scripts start",
     "start": "npm install -g serve && serve -s build",
     "build": "react-scripts build",
