@@ -9,6 +9,6 @@ export const axiosWithAuth = token => {
     },
     // baseURL: process.env.REACT_APP_BASEURL
     
-    baseURL:"https://enterprise-devices-staging.herokuapp.com"
+    baseURL:"https://enterprise-devices-testing.herokuapp.com"
   });
 };
