@@ -7,8 +7,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+
 // import IconButton from "@material-ui/core/IconButton";
 // import Typography from "@material-ui/core/Typography";
+
+import Link from "@material-ui/core/Link";
+import ResponsiveDrawer from './NavBar'
+
 // import MenuIcon from "@material-ui/icons/Menu";
 // import AppBar from "@material-ui/core/AppBar";
 // import Toolbar from "@material-ui/core/Toolbar";
@@ -43,6 +48,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = props => {
   const classes = useStyles();
+
   const [devices, setDevices] = useState({ devices: [] });
   useEffect(() => {
     console.log("IN AXIOS CAL");
@@ -57,12 +63,15 @@ const Dashboard = props => {
       });
   }, []);
 
+
   console.log(devices, "devices state");
   return (
     <div className={classes.root}>
       <CssBaseline />
 
+
       <SideBar />
+
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>

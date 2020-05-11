@@ -84,6 +84,7 @@ const SignupForm = (props) => {
     }),
     onSubmit: (values) => {
       //* Formatting request object for submission
+      const {cookies,signUp,error} = props
       const {
         firstName,
         lastName,
@@ -107,6 +108,7 @@ const SignupForm = (props) => {
           props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
           //TODO: Once completed, push user to dashboard. Currently just the localhost version.
           props.history.push("localhost:3000/dashboard");
+
         })
         .catch((err) => {
           console.log({ message: err });

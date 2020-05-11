@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import {axiosWithAuth} from '../components/utils/axiosWithAuth'
+import createBrowserHistory from '../components/utils/History'
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -7,6 +8,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const SIGNUP_START = "SIGNUP_START";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
+
 
 //Each post req is to the staging BE
 
@@ -45,23 +47,3 @@ export const signUp = (userInfo) => (dispatch) => {
     });
 };
 
-/*
-
-export const signUp = (userInfo) => (dispatch) => {
-  console.log("userInfo on auth actions", userInfo);
-  dispatch({ type: SIGNUP_START });
-  axios
-    .post("http://enterprise-devices.herokuapp.com/api/auth/signup", userInfo)
-    .then((response) => {
-      console.log(response, "response from auth sign up action");
-      dispatch({ type: SIGNUP_SUCCESS, payload: response.data.user });
-      return true;
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
-    });
-};
-
-
-*/

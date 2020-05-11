@@ -16,10 +16,12 @@ export const SUBMIT_REQUESTS_START = "SUBMIT_REQUESTS_START";
 export const SUBMIT_REQUESTS_SUCCESS = "SUBMIT_REQUESTS_SUCCESS";
 export const SUBMIT_REQUESTS_FAIL = "SUBMIT_REQUESTS_FAIL";
 
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 export const getDevices = () => dispatch => {
   dispatch({ type: FETCH_DEVICES_START });
   axios
-    .get("http://enterprise-devices.herokuapp.com/api/devices")
+    .get(backendURL)
     .then(response => {
       dispatch({ type: FETCH_DEVICES_SUCCESS, payload: response.data });
     })

@@ -1,5 +1,7 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
 }
 
 .App-logo {
@@ -19,4 +21,28 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+
+.approval-form {
+  display: flex;
+  flex-direction: column;
+  background: pink;
+  width: 60%;
+  margin: 30px auto;
+}
+
+.approval-form input {
+  width: 100px;
+}
+
+.manager-label-section {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 10px auto;
+}
+
+.manager-label-section label {
+  padding-right: 5px;
 }
