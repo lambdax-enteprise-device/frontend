@@ -12,7 +12,7 @@ import { withCookies } from "react-cookie";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
-
+import ForgotPassword from './components/auth/ForgotPassword'
 import SignUp from "./components/auth/SignUp";
 
 import Landing from "./Landing";
@@ -48,6 +48,7 @@ function App(props) {
           render={(...props) => <Dashboard cookies={props.cookies} />}
         />
         <Route path="/approval" render={() => <ManagerApproval cookies={props.cookies} />} />
+       <Route path="/forgotpassword" render={() => <ForgotPassword cookies={props.cookies}/>}/>
       </Switch>
     </div>
   );

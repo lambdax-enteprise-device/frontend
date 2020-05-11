@@ -144,7 +144,7 @@ const Login = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="/forgotpassword" variant="body2">
+              <Link href="https://enterprise-devices-staging.herokuapp.com/api/auth/password/forgotpassword" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

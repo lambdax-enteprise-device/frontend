@@ -42,3 +42,16 @@ export const signUp = (userInfo) => (dispatch) => {
     });
 };
 
+export const resetPass = (email) => (dispatch) => {
+  dispatch({type: RESET_PASSWORD_START})
+  axiosWithAuth()
+        .get('/api/auth/password/forgotpassword',email)
+        .then(response =>{
+          dispatch({type: RESET_PASSWORD_SUCCESS,payload:response.data})
+
+        })
+        .catch((err) => {
+          console.log(err)
+          dispatch({type:RESET_PASSWORD_FAIL ,payload:err.message})
+        })
+}
