@@ -53,7 +53,7 @@ const Dashboard = props => {
   useEffect(() => {
     console.log("IN AXIOS CAL");
     axios
-      .get("http://enterprise-devices.herokuapp.com/api/devices")
+      .get("https://enterprise-devices-testing.herokuapp.com/api/devices")
       .then(res => {
         console.log(res, "get RES");
         setDevices({ devices: res });
