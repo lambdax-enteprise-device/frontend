@@ -22,34 +22,35 @@ import Paper from "@material-ui/core/Paper";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "15%"
+    padding: "15%",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-const Login = props => {
+
+const Login = (props) => {
 
   const classes = useStyles(); //material ui class
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: ""
+      password: "",
     },
     validateOnChange: false, //* To prevent onChange validation so errors don't pop until onBlur
     validationSchema: Yup.object({
@@ -58,24 +59,28 @@ const Login = props => {
         .required("This field is required"),
       password: Yup.string()
         .min(8, "Password must be 8 characters or more")
-        .required("This field is required")
+        .required("This field is required"),
     }),
-    onSubmit: values => {
 
-      const { cookies, login, error } = props
+    onSubmit: (values) => {
+      // console.log(props.history, "props.history on submit");
 
-      login(values, (props.response, error => {
-        History.push(props.history)
-        if (props.response) {
+      props
+        .login(values)
+        //! After running this login action, the .then is never reached. We want the push to dash in there
+        .then((res) => {
+          console.log("INSIDE .THEN");
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard
+          props.history.push("/dashboard");
+        })
+        .catch((error) => {
+          console.log("ERROR");
+          console.log({ message: error });
+          //TODO: Render error Div
+        });
+    },
 
-          cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
-        }
-        return error => { console.log(error) }
-
-        //TODO: Once completed, push user to dashboard
-      }
-      ))
-    }
   });
 
   return (
@@ -150,11 +155,11 @@ const Login = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggingIn: state.authReducer.isLoggingIn,
     error: state.authReducer.error,
-    user: state.authReducer.user
+    user: state.authReducer.user,
   };
 };
 

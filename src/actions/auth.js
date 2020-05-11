@@ -12,8 +12,10 @@ export const RESET_PASSWORD_START = "RESET_PASSWORD_START";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL"
 
-export const login =  creds => dispatch => {
-   const History = createBrowserHistory
+
+//Each post req is to the staging BE
+
+export const login = (creds) => (dispatch) => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post("/api/auth/login", creds)
@@ -21,13 +23,12 @@ export const login =  creds => dispatch => {
     dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token,'history':[History.location.pathname]}})
     return window.location.replace("/dashboard")
     })
-    .catch(err => {
-      dispatch({ type: LOGIN_FAIL, payload: err.message });
+    .catch((err) => {
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message });
     });
 };
 
-export const signUp = userInfo => dispatch => {
-  const History = createBrowserHistory
+export const signUp = (userInfo) => (dispatch) => {
   dispatch({ type: SIGNUP_START });
   axiosWithAuth()
     .post("/api/auth/signup", userInfo)
@@ -35,10 +36,9 @@ export const signUp = userInfo => dispatch => {
       dispatch({ type: SIGNUP_SUCCESS, payload: response.data});
       return window.location.replace("/dashboard");
     })
-    
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-      dispatch({ type: SIGNUP_FAIL, payload: err.message });
+      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
     });
 };
 

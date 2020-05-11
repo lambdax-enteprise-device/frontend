@@ -21,27 +21,27 @@ import Paper from "@material-ui/core/Paper";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "15%"
+    padding: "15%",
   },
   form: {
     // width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-const SignupForm = props => {
+const SignupForm = (props) => {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
@@ -52,7 +52,7 @@ const SignupForm = props => {
       firstName: "",
       lastName: "",
       email: "",
-      confirmEmail: ""
+      confirmEmail: "",
     },
     validateOnChange: false, //* To prevent onChange validation so errors don't pop until onBlur
     validationSchema: Yup.object({
@@ -75,16 +75,14 @@ const SignupForm = props => {
       lastName: Yup.string()
         .max(120, "Must be 120 characters or less")
         .required("Required"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
       confirmEmail: Yup.string()
         .email("Invalid email address")
         .required("Required")
-        .oneOf([Yup.ref("email"), null], "Email addresses must match")
+        .oneOf([Yup.ref("email"), null], "Email addresses must match"),
       // TODO: Require complex passwords
     }),
-    onSubmit: values => {
+    onSubmit: (values) => {
       //* Formatting request object for submission
       const { cookies, signUp, error } = props
       const {
@@ -93,7 +91,7 @@ const SignupForm = props => {
         title,
         companyName,
         password,
-        email
+        email,
       } = values;
       const signUpInfo = {
         first_name: firstName,
@@ -101,19 +99,21 @@ const SignupForm = props => {
         company_name: companyName,
         title: title,
         email: email,
-        password: password
+        password: password,
       };
 
-      signUp(signUpInfo)
-        .then(res => {
-          History.push(props.history)
-          cookies.set("entDeviceToken", res.data.token, { path: "/dashboard" });
-          //TODO: Once completed, push user to dashboard
+      props
+        .signUp(signUpInfo)
+        .then((res) => {
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          //TODO: Once completed, push user to dashboard. Currently just the localhost version.
+          props.history.push("localhost:3000/dashboard");
+
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ message: err });
         });
-    }
+    },
   });
   return (
     <Container component="main" maxWidth="xs">
@@ -239,11 +239,11 @@ const SignupForm = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggingIn: state.authReducer.isLoggingIn,
     error: state.authReducer.error,
-    user: state.authReducer.user
+    user: state.authReducer.user,
   };
 };
 
