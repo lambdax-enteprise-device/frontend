@@ -12,11 +12,14 @@ import { withCookies } from "react-cookie";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
+import EquipmentRequest from "./components/EquipmentRequest.js";
+
 import ForgotPassword from './components/auth/ForgotPassword'
 import SignUp from "./components/auth/SignUp";
 
 import Landing from "./Landing";
 import ManagerApproval from "./components/ManagerApproval";
+
 
 
 function App(props) {
@@ -47,8 +50,13 @@ function App(props) {
           component={Dashboard}
           render={(...props) => <Dashboard cookies={props.cookies} />}
         />
+        <Route 
+          path="/equipment-request"
+          render={(...props) => <EquipmentRequest cookies={props.cookies} />}
+        />
         <Route path="/approval" render={() => <ManagerApproval cookies={props.cookies} />} />
        <Route path="/forgotpassword" render={() => <ForgotPassword cookies={props.cookies}/>}/>
+
       </Switch>
     </div>
   );
