@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { connect } from "react-redux";
 import axios from 'axios';
 import { axiosWithAuth } from './utils/axiosWithAuth';
-
+import '@stripe/stripe-js';
 
 const ManagerApproval = () => {
     const [devices, setDevices] = useState([]);

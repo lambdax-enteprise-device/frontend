@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { withCookies } from "react-cookie";
-
+import '@stripe/stripe-js';
 // import NavBar from "./components/NavBar";
 // import Profile from "./components/Profile";
 // import PrivateRoute from "./components/PrivateRoute";
