@@ -41,6 +41,7 @@ function App(props) {
           component={SignUp}
           render={() => <SignupForm cookies={props.cookies} />}
         />
+       
         <Route
           path="/dashboard"
           component={Dashboard}
