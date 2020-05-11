@@ -20,11 +20,11 @@ export const login = (creds) => (dispatch) => {
   axiosWithAuth()
     .post("/api/auth/login", creds)
     .then(response => {
-    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token,'history':[History.location.pathname]}})
+    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token}})
     return window.location.replace("/dashboard")
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.message });
+      dispatch({ type: LOGIN_FAIL, payload: err.message });
     });
 };
 
@@ -38,7 +38,7 @@ export const signUp = (userInfo) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.message });
+      dispatch({ type: SIGNUP_FAIL, payload: err.message });
     });
 };
 
