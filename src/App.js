@@ -1,5 +1,8 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+
 import { withCookies } from "react-cookie";
 
 // import NavBar from "./components/NavBar";
@@ -9,8 +12,12 @@ import { withCookies } from "react-cookie";
 import Login from "./components/auth/Login";
 import SignupForm from "./components/auth/SignUp";
 import Dashboard from "./components/dashboard/Dashboard";
+
+import SignUp from "./components/auth/SignUp";
+
 import Landing from "./Landing";
 import ManagerApproval from "./components/ManagerApproval";
+
 
 function App(props) {
   return (
@@ -24,13 +31,19 @@ function App(props) {
         <Route path="/" exact component={Landing} />
         
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
-        <Route path="/login" render={() => <Login cookies={props.cookies} />} />
+        <Route
+          path="/login"
+          component={Login}
+          render={() => <Login cookies={props.cookies} />}
+        />
         <Route
           path="/signup"
+          component={SignUp}
           render={() => <SignupForm cookies={props.cookies} />}
         />
         <Route
           path="/dashboard"
+          component={Dashboard}
           render={(...props) => <Dashboard cookies={props.cookies} />}
         />
         <Route path="/approval" render={() => <ManagerApproval cookies={props.cookies} />} />
