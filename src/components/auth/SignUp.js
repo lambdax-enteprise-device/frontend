@@ -86,7 +86,7 @@ const SignupForm = props => {
     }),
     onSubmit: values => {
       //* Formatting request object for submission
-      const {cookies,signUp,error} = props
+      const { cookies, signUp, error } = props
       const {
         firstName,
         lastName,

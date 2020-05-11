@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
-  
+
   const classes = useStyles(); //material ui class
   const formik = useFormik({
     initialValues: {
@@ -62,19 +62,19 @@ const Login = props => {
     }),
     onSubmit: values => {
 
-      const {cookies,login,error} = props
-       
-        login(values,(props.response,error =>{
-          History.push(props.history)
-        if(props.response) {
-               
-           cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
+      const { cookies, login, error } = props
+
+      login(values, (props.response, error => {
+        History.push(props.history)
+        if (props.response) {
+
+          cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
         }
-        return error => {console.log(error)}
-     
-          //TODO: Once completed, push user to dashboard
-        }
-        ))
+        return error => { console.log(error) }
+
+        //TODO: Once completed, push user to dashboard
+      }
+      ))
     }
   });
 
@@ -139,7 +139,7 @@ const Login = props => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/forgot" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

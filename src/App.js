@@ -29,6 +29,7 @@ function App(props) {
           path="/signup"
           render={() => <SignupForm cookies={props.cookies} />}
         />
+       
         <Route
           path="/dashboard"
           render={(...props) => <Dashboard cookies={props.cookies} />}
