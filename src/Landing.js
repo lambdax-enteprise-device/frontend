@@ -6,42 +6,69 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import DeviceImage from "./assets/devices.svg";
+import EquipImage from "./assets/equipment.jpg";
+import LaptopImage from "./assets/laptops.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
+  title: {
+    textAlign: "center",
+    fontSize: 50,
+    fontWeight: 700,
+    margin: theme.spacing(5, 0),
+  },
+  row: {
+    display: "flex",    
+    justifyContent: "center",
+    margin: theme.spacing(0, 20),
+    height: "240px",
+  },
   image: {
-    backgroundImage: "url(" + DeviceImage + ")",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "90%",
+    backgroundSize: "65%",
     backgroundPosition: "center",
+
   },
-  paper: {
-    margin: theme.spacing(10, 10),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
+  image1: {
+    backgroundImage: "url(" + EquipImage + ")",
+    marginLeft: theme.spacing(10)
   },
+  image2: {
+    backgroundImage: "url(" + DeviceImage + ")",
+  },
+  image3: {
+    backgroundImage: "url(" + LaptopImage + ")",
+    marginLeft: theme.spacing(10),
+  },
+  
   content: {
-    marginBottom: theme.spacing(8),
+    margin: theme.spacing(8, 8),
+    marginLeft: theme.spacing(0),
+    width: "50%",
   },
-  title: {
-    fontWeight: 700,
-    marginBottom: theme.spacing(10),
-    fontSize: 40,
+  contentAlt: {
+    margin: theme.spacing(8, 8),
+    marginRight: theme.spacing(0),
+    textAlign: "right",
+    width: "50%",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
+    margin: theme.spacing(0, 10, 10, 10),
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    textAlign: "center",
   },
   submit: {
     margin: theme.spacing(2, 15),
-    width: "50%",
+    width: "30%",
   },
 }));
 
@@ -52,23 +79,36 @@ export default function Landing() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} square>
-        <div className={classes.paper}>
-          <Typography className={classes.title} variant="h4" color="primary">
-            Enterprise Device Tracker
-          </Typography>
-          <Typography className={classes.content} component="h1" variant="h5">
-            Create the perfect hardware asset register to organize all your
-            employees and the hardware they've been assigned
-          </Typography>
-          <Typography className={classes.content} component="h1" variant="h5">
-            Track hardware assignments across departments and geographic
-            locations
-          </Typography>
-          <Typography className={classes.content} component="h1" variant="h5">
-            Minimize expenditures due to lost or missing devices
-          </Typography>
+      <Grid item xs={12} sm={12} md={12}>
+        <Typography className={classes.title} variant="h4" color="primary">
+          Enterprise Device Tracker
+        </Typography>
+      </Grid>
+
+      <Grid item xs={false} sm={4} md={12} className={classes.row}>
+        <Grid item xs={false} sm={4} md={7} className={`${classes.image1} ${classes.image}`} />
+        <Typography className={classes.content} component="h1" variant="h5">
+        Create the perfect hardware asset register to organize and track all your
+        company's hardware
+        </Typography>
+      </Grid>
+          
+      <Grid item xs={false} sm={4} md={12} className={classes.row}>
+        <Typography className={`${classes.content} ${classes.contentAlt}`} component="h1" variant="h5">
+        Track hardware assignments across departments and geographic
+        locations
+        </Typography>
+        <Grid item xs={false} sm={4} md={7} className={`${classes.image2} ${classes.image}`} />
+      </Grid>
+          
+      <Grid item xs={false} sm={4} md={12} className={classes.row}>
+        <Grid item xs={false} sm={4} md={7} className={`${classes.image3} ${classes.image}`} />
+        <Typography className={classes.content} component="h1" variant="h5">
+          Minimize expenditures due to lost or missing devices
+        </Typography>
+      </Grid>
+
+      <Grid item xs={12} sm={8} md={12} className={classes.row}>
           <form className={classes.form} noValidate>
             <Button
               onClick={() => history.push("/login")}
@@ -89,10 +129,9 @@ export default function Landing() {
             >
             Sign Up
             </Button>
-    
           </form>
-        </div>
       </Grid>
+
     </Grid>
   );
 }
