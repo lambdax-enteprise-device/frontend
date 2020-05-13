@@ -33,18 +33,18 @@ const Devices = props => {
             <TableCell>Device ID</TableCell>
             <TableCell>Company ID</TableCell>
             <TableCell>Device Type</TableCell>
-            <TableCell>Serial Numer</TableCell>
+            <TableCell>Serial Number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {(devicesData || []).map(item => (
+          {/* {(devicesData || []).map(item => (
             <TableRow>
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.company_id}</TableCell>
               <TableCell>{item.device_type_id}</TableCell>
               <TableCell>{item.serial_number}</TableCell>
             </TableRow>
-          ))}
+          ))} */}
         </TableBody>
       </Table>
     </div>
