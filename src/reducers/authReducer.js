@@ -4,12 +4,13 @@ import {
   LOGIN_FAIL,
   SIGNUP_START,
   SIGNUP_SUCCESS,
-  SIGNUP_FAIL
+  SIGNUP_FAIL,
 } from "../actions";
 const initialState = {
   isLoggingIn: false,
   error: null,
-  user: {}
+  user: {},
+  loginSuccess: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -20,41 +21,44 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {}
+        user: {},
+        loginSuccess: false,
       };
     case LOGIN_SUCCESS:
       return {
         isLoggingIn: false,
         user: action.payload,
-        error: null
+        error: null,
+        loginSuccess: true,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         isLoggingIn: false,
         user: {},
-        error: action.payload
+        error: action.payload,
+        loginSuccess: false,
       };
     case SIGNUP_START:
       return {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {}
+        user: {},
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         error: null,
-        user: action.payload
+        user: action.payload,
       };
     case SIGNUP_FAIL:
       return {
         ...state,
         isLoggingIn: false,
         error: action.payload,
-        user: {}
+        user: {},
       };
     default:
       return state;

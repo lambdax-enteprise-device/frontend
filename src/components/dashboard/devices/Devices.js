@@ -6,16 +6,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 
-//* This was for a component that listed TableCells after mapping over relevant data. No longer using it, but may need to in future.
-//import Device from "./Device.js";
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   seeMore: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 }));
 
-const Devices = props => {
+const Devices = (props) => {
   const classes = useStyles();
 
   let devicesData = props.devices.devices.data;
@@ -37,7 +34,7 @@ const Devices = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(devicesData || []).map(item => (
+          {(devicesData || []).map((item) => (
             <TableRow>
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.company_id}</TableCell>

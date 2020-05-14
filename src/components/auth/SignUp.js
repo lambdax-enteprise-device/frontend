@@ -246,3 +246,12 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { signUp })(SignupForm);
+
+/*
+signUp(signUpInfo)
+        .then(res => {
+          History.push(props.history)
+          cookies.set("entDeviceToken", res.data.token, { path: "/dashboard" });
+          //TODO: Once completed, push user to dashboard
+
+*/

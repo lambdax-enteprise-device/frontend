@@ -17,42 +17,42 @@ import Paper from "@material-ui/core/Paper";
 import SideBar from "./SideBar/SideBar";
 import Devices from "./devices/Devices.js";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
 
   appBarSpacer: theme.mixins.toolbar,
   content: {
-    width: "100vw"
+    width: "100vw",
   },
   container: {
     paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
   paper: {
     padding: theme.spacing(2),
     display: "flex",
     overflow: "auto",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   fixedHeight: {
-    height: 240
-  }
+    height: 240,
+  },
 }));
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   const classes = useStyles();
   const [devices, setDevices] = useState({ devices: [] });
   useEffect(() => {
     console.log("IN AXIOS CAL");
     axios
       .get("http://enterprise-devices.herokuapp.com/api/devices")
-      .then(res => {
+      .then((res) => {
         console.log(res, "get RES");
         setDevices({ devices: res });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("GET err,", err);
       });
   }, []);
@@ -79,3 +79,40 @@ const Dashboard = props => {
 };
 
 export default Dashboard;
+
+/*
+
+=======
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
+          ></IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
+            Dashboard
+          </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary"></Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <ResponsiveDrawer/>
+>>>>>>> Staging
+
+*/

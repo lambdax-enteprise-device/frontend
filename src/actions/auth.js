@@ -12,7 +12,7 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
 export const login = (creds) => (dispatch) => {
   dispatch({ type: LOGIN_START });
-  axios
+  return axios
     .post(
       "http://enterprise-devices-testing.herokuapp.com/api/auth/login",
       creds
