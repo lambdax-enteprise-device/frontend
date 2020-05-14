@@ -11,12 +11,21 @@ import PeopleIcon from "@material-ui/icons/People";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 // import { Menu, MenuItem, MenuList } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
 export const MainListItems = props => {
   return (
     <List>
+
+      <ListItem button component={Link} to={"/#"}>
+        <ListItemIcon>
+          <AddCircleIcon style={{ color: "#ff9800" }} />
+        </ListItemIcon>
+        <ListItemText primary="Add device" />
+      </ListItem>
+
       <ListItem button component={Link} to={"/#"}>
         <ListItemIcon>
           <CalendarTodayIcon style={{ color: "#ff9800" }} />
