@@ -15,15 +15,34 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 // import { Menu, MenuItem, MenuList } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
+//component imports
+import FormDialog from "./FormDialog"
+
 export const MainListItems = props => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (e) => {
+    console.log('handing click opening...')
+    setOpen(true);
+    e.preventDefault()
+  };
+
+  const handleClose = (e) => {
+    setOpen(false);
+    e.preventDefault()
+  };
+
   return (
     <List>
 
-      <ListItem button component={Link} to={"/#"}>
+      <ListItem button >
         <ListItemIcon>
-          <AddCircleIcon style={{ color: "#ff9800" }} />
+
+          <AddCircleIcon style={{ color: "#ff9800" }} onClick={handleClickOpen} />
+          <FormDialog onClick={handleClickOpen} handleClickOpen={handleClickOpen} handleClose={handleClose} setOpen={setOpen} open={open} />
+
         </ListItemIcon>
-        <ListItemText primary="Add device" />
+        <ListItemText primary="Add device" onClick={handleClickOpen} />
       </ListItem>
 
       <ListItem button component={Link} to={"/#"}>
@@ -61,7 +80,7 @@ export const MainListItems = props => {
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>
-    </List>
+    </List >
   );
 };
 
