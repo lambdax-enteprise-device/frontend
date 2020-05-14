@@ -16,15 +16,41 @@ const useStyles = makeStyles(theme => ({
   
 const Inventory = () => {
   const [inventory, setInventory] = useState([]);
-  const [filteredInventory, setFilteredInventory] = useState([]);
+
+ 
   const classes = useStyles();
+  const [filteredInventory, setFilteredInventory] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:4545/api/devices")
       .then(res => setInventory(res.data))
       .catch(err => console.log(err));
-  }, [filteredInventory]);
+  }, [setFilteredInventory]);
 
+
+  const [companies, setCompanies] = useState([]);
+  
+  useEffect(() => {
+    axios
+    .get("http://localhost:4545/api/company")
+    .then(res => setCompanies(res.data))
+    .catch(err => console.log(err));
+  }, [setCompanies]);
+
+  console.log(companies)
+
+  const arrayOfCompanyIds = companies.map(company => { 
+    if (company.active) {return company.id}});
+
+  console.log(arrayOfCompanyIds)
+
+  const companyTest = e => {
+    console.log(e.target.childNodes[1].textContent)
+    const idOfCompany = Number(e.target.childNodes[1].textContent);
+    console.log(typeof idOfCompany)
+    setFilteredInventory(inventory.filter(item => item.company_id === idOfCompany))
+  }
+  /*
   const companyOne = e => {
     setFilteredInventory(inventory.filter(item => item.company_id === 1));
   };
@@ -36,7 +62,7 @@ const Inventory = () => {
   const companyThree = e => {
     setFilteredInventory(inventory.filter(item => item.company_id === 3));
   };
-
+  */
   const allCompanies = e => {
     setFilteredInventory(inventory);
   };
@@ -60,6 +86,7 @@ const Inventory = () => {
           >
             All Companies
           </Button>
+          {/*
           <Button color='primary' variant='contained' onClick={companyOne}>
             Company 1
           </Button>
@@ -69,6 +96,10 @@ const Inventory = () => {
           <Button color='primary' variant='contained' onClick={companyThree}>
             Company 3
           </Button>
+  */}
+          {arrayOfCompanyIds.map(companyId =>
+            <Button color='primary' variant='contained' onClick={companyTest} className={companyId}>Companies {companyId}</Button>
+            )}
         </Grid>
         <Grid
           container
