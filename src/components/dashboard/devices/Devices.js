@@ -30,7 +30,7 @@ const Devices = (props) => {
             <TableCell>Device ID</TableCell>
             <TableCell>Company ID</TableCell>
             <TableCell>Device Type</TableCell>
-            <TableCell>Serial Numer</TableCell>
+            <TableCell>Serial Number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,7 +41,8 @@ const Devices = (props) => {
               <TableCell>{item.device_type_id}</TableCell>
               <TableCell>{item.serial_number}</TableCell>
             </TableRow>
-          ))}
+          ))}{" "}
+          */}
         </TableBody>
       </Table>
     </div>
