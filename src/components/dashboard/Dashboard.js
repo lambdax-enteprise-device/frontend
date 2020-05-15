@@ -57,7 +57,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     getDevices();
-  }, []);
+  }, [getDevices]);
 
   return (
     <div className={classes.root}>
