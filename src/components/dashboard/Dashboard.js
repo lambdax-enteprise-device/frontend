@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useReducer, useCallback } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
@@ -54,51 +54,11 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
   const classes = useStyles();
   const { getDevices, addDevice, removeDevice } = props;
-  // const getDevicesCallback = useCallback(() => {
-  //   getDevices()
-  //     .then((res) => {
-  //       console.log(res, "res in device call");
-  //       setDevices({ devices: props.devices });
-  //     })
-  //     .catch((err) => {
-  //       console.log("GET err,", err);
-  //     });
-  // });
 
-  const [devicesState, setDevices] = useState({ devicesState: [] });
   useEffect(() => {
-    // console.log(props, "ALL PROPS");
-    // console.log(getDevices, "is getdevices undefined?");
-    // console.log(props.getDevices, "props.getDeivces");
-    // getDevicesCallback();
-    // console.log(props.gettingDevices, "getting devices");
-    // if (props.gettingDevices === false) {
-    getDevices()
-      // setDevices({ devicesState: props.devices });
-      .then((res) => {
-        // console.log(res, "res in device call");
-        console.log(props.devices, "redux store devices");
-        setDevices({ devicesState: props.devices });
-      })
-      .catch((err) => {
-        console.log("Error in useEffect for device fetch, ", err);
-      });
-    // }
-    // axios
-    // .get("https://enterprise-devices-testing.herokuapp.com/api/devices")
-    // .then((res) => {
-    //   console.log(res, "get RES");
-    //   setDevices({ devices: res });
-    // })
-    // .catch((err) => {
-    //   console.log("GET err,", err);
-    // });
-    // }
-  }, [props.devices.length]);
+    getDevices();
+  }, []);
 
-  console.log(devicesState, "devices state");
-  console.log(props.devices, "redux device state after useeffect");
-  console.log(props, "ALL PROPS");
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -110,7 +70,11 @@ const Dashboard = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Devices devices={devicesState} />
+                {props.gettingDevices ? (
+                  <div>Loading...</div>
+                ) : (
+                  <Devices devices={props.devices} />
+                )}
               </Paper>
             </Grid>
           </Grid>

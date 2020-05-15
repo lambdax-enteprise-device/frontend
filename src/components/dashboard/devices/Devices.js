@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const Devices = (props) => {
   const classes = useStyles();
   console.log(props, "devices comp props");
-  let devicesData = props.devicesState;
+  let devicesData = props.devices;
 
   return (
     <div>
