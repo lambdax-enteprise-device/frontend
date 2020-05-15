@@ -1,6 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+
+//actions
+import { getDevices, addDevice, updateDevice } from "../../actions/devices.js";
+
 //styles
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -48,22 +53,52 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = (props) => {
   const classes = useStyles();
+  const { getDevices, addDevice, removeDevice } = props;
+  // const getDevicesCallback = useCallback(() => {
+  //   getDevices()
+  //     .then((res) => {
+  //       console.log(res, "res in device call");
+  //       setDevices({ devices: props.devices });
+  //     })
+  //     .catch((err) => {
+  //       console.log("GET err,", err);
+  //     });
+  // });
 
-  const [devices, setDevices] = useState({ devices: [] });
+  const [devicesState, setDevices] = useState({ devicesState: [] });
   useEffect(() => {
-    console.log("IN AXIOS CAL");
-    axios
-      .get("https://enterprise-devices-testing.herokuapp.com/api/devices")
+    // console.log(props, "ALL PROPS");
+    // console.log(getDevices, "is getdevices undefined?");
+    // console.log(props.getDevices, "props.getDeivces");
+    // getDevicesCallback();
+    // console.log(props.gettingDevices, "getting devices");
+    // if (props.gettingDevices === false) {
+    getDevices()
+      // setDevices({ devicesState: props.devices });
       .then((res) => {
-        console.log(res, "get RES");
-        setDevices({ devices: res });
+        // console.log(res, "res in device call");
+        console.log(props.devices, "redux store devices");
+        setDevices({ devicesState: props.devices });
       })
       .catch((err) => {
-        console.log("GET err,", err);
+        console.log("Error in useEffect for device fetch, ", err);
       });
-  }, []);
+    // }
+    // axios
+    // .get("https://enterprise-devices-testing.herokuapp.com/api/devices")
+    // .then((res) => {
+    //   console.log(res, "get RES");
+    //   setDevices({ devices: res });
+    // })
+    // .catch((err) => {
+    //   console.log("GET err,", err);
+    // });
+    // }
+  }, [props.devices.length]);
 
-  console.log(devices, "devices state");
+  console.log(devicesState, "devices state");
+  console.log(props.devices, "redux device state after useeffect");
+  console.log(props, "ALL PROPS");
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -75,7 +110,7 @@ const Dashboard = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Devices devices={devices} />
+                <Devices devices={devicesState} />
               </Paper>
             </Grid>
           </Grid>
@@ -85,4 +120,16 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    devices: state.deviceReducer.devices,
+    error: state.deviceReducer.error,
+    gettingDevices: state.deviceReducer.gettingDevices,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getDevices,
+  addDevice,
+  updateDevice,
+})(Dashboard);

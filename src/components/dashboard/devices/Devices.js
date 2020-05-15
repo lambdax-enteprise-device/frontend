@@ -14,13 +14,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Devices = (props) => {
   const classes = useStyles();
+  console.log(props, "devices comp props");
+  let devicesData = props.devicesState;
 
-  let devicesData = props.devices.devices.data;
-  // console.log(relevant, "relevant");
-
-  // relevant.map(item => {
-  //   console.log(item);
-  // });
   return (
     <div>
       <h1>Devices</h1>
@@ -42,7 +38,6 @@ const Devices = (props) => {
               <TableCell>{item.serial_number}</TableCell>
             </TableRow>
           ))}{" "}
-          */}
         </TableBody>
       </Table>
     </div>
@@ -50,10 +45,3 @@ const Devices = (props) => {
 };
 
 export default Devices;
-
-/*
-   {(relevant || []).map(item => {
-              return <Device item={item} />;
-            })}
-
-*/

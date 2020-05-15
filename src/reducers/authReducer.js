@@ -23,7 +23,8 @@ export const authReducer = (state = initialState, action) => {
         isLoggingIn: true,
         error: null,
         user: { token: "" },
-        history: [createBrowserHistory()],
+        //! Getting an error when trying to login. 'Object is not a function', referring to createBrowserHistory().
+        // history: [createBrowserHistory()],
       };
     case LOGIN_SUCCESS:
       return {
