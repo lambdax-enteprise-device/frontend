@@ -12,18 +12,25 @@ import LaptopImage from "./assets/laptops.jpg";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
+    width: "90%",
+    margin: theme.spacing(0, 10),
   },
   title: {
     textAlign: "center",
     fontSize: 50,
     fontWeight: 700,
-    margin: theme.spacing(5, 0),
+    margin: theme.spacing(5, 0, 2, 0),
+  },
+  section: {
+    width: "80%",
+    margin: theme.spacing(2, 15),
   },
   row: {
     display: "flex",    
     justifyContent: "center",
-    margin: theme.spacing(0, 20),
     height: "240px",
+    width: "70%",
+    margin: theme.spacing(0, 15),
   },
   image: {
     backgroundRepeat: "no-repeat",
@@ -31,30 +38,30 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "65%",
+    backgroundSize: "90%",
     backgroundPosition: "center",
 
   },
   image1: {
     backgroundImage: "url(" + EquipImage + ")",
-    marginLeft: theme.spacing(10)
+    marginLeft: theme.spacing(5)
   },
   image2: {
     backgroundImage: "url(" + DeviceImage + ")",
   },
   image3: {
     backgroundImage: "url(" + LaptopImage + ")",
-    marginLeft: theme.spacing(10),
+    marginLeft: theme.spacing(5),
   },
   
   content: {
-    margin: theme.spacing(8, 8),
-    marginLeft: theme.spacing(0),
+    margin: theme.spacing(8, 4),
+    // marginLeft: theme.spacing(0),
     width: "50%",
   },
   contentAlt: {
-    margin: theme.spacing(8, 8),
-    marginRight: theme.spacing(0),
+    margin: theme.spacing(8, 4),
+    // marginRight: theme.spacing(0),
     textAlign: "right",
     width: "50%",
   },
@@ -83,55 +90,58 @@ export default function Landing() {
         <Typography className={classes.title} variant="h4" color="primary">
           Enterprise Device Tracker
         </Typography>
+        <hr></hr>
       </Grid>
 
-      <Grid item xs={false} sm={4} md={12} className={classes.row}>
-        <Grid item xs={false} sm={4} md={7} className={`${classes.image1} ${classes.image}`} />
-        <Typography className={classes.content} component="h1" variant="h5">
-        Create the perfect hardware asset register to organize and track all your
-        company's hardware
-        </Typography>
-      </Grid>
-          
-      <Grid item xs={false} sm={4} md={12} className={classes.row}>
-        <Typography className={`${classes.content} ${classes.contentAlt}`} component="h1" variant="h5">
-        Track hardware assignments across departments and geographic
-        locations
-        </Typography>
-        <Grid item xs={false} sm={4} md={7} className={`${classes.image2} ${classes.image}`} />
-      </Grid>
-          
-      <Grid item xs={false} sm={4} md={12} className={classes.row}>
-        <Grid item xs={false} sm={4} md={7} className={`${classes.image3} ${classes.image}`} />
-        <Typography className={classes.content} component="h1" variant="h5">
+      <div className={classes.section}>
+        <Grid item borderBottom={1} xs={false} sm={4} md={12} className={classes.row}>
+          <Grid item xs={false} sm={4} md={7} className={`${classes.image1} ${classes.image}`} />
+          <Typography className={classes.content} component="h1" variant="h5">
+          Create the perfect hardware asset register to organize and track all your
+          company's hardware
+          </Typography>
+        </Grid>
+
+        <Grid item borderBottom={1} divider xs={false} sm={4} md={12} className={classes.row}>
+          <Typography className={`${classes.content} ${classes.contentAlt}`} component="h1" variant="h5">
+          Track hardware assignments across departments and geographic
+          locations
+          </Typography>
+          <Grid item xs={false} sm={4} md={7} className={`${classes.image2} ${classes.image}`} />
+        </Grid>
+        
+        <Grid item xs={false} sm={4} md={12} className={classes.row}>
+          <Grid item xs={false} sm={4} md={7} className={`${classes.image3} ${classes.image}`} />
+          <Typography className={classes.content} component="h1" variant="h5">
           Minimize expenditures due to lost or missing devices
-        </Typography>
-      </Grid>
-
-      <Grid item xs={12} sm={8} md={12} className={classes.row}>
+          </Typography>
+        </Grid>
+      </div>
+        
+        <Grid item xs={12} sm={8} md={12} className={classes.row}>
           <form className={classes.form} noValidate>
             <Button
-              onClick={() => history.push("/login")}
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+            onClick={() => history.push("/login")}
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
             >
-              Login
+            Login
             </Button>
-            <hr/>
+            
             <Button 
-              onClick={()=> history.push("/signup")}
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+            onClick={()=> history.push("/signup")}
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
             >
             Sign Up
             </Button>
           </form>
-      </Grid>
-
+        </Grid>
+      
     </Grid>
   );
 }
