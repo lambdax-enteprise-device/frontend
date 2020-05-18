@@ -5,13 +5,14 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
-    marginTop: 10,
     marginBottom: 5,
-    maxWidth: 250,
+    width: '25em',
     display: 'flex',
     flexFlow: 'wrap',
-    justifyContent: 'center'
-  }
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  toot: {marginTop:20}
 })
 
 export default function Cards(props) {
