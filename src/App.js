@@ -39,6 +39,7 @@ function App(props) {
           path="/inventory"
           render={(...props) => <Inventory cookies={props.cookies} />}
           />
+          {/*
           <Route
           path="/add-device"
           render={(...props) => <AddDevice cookies={props.cookies} />}
@@ -46,6 +47,7 @@ function App(props) {
           <Route
           path="/remove-device"
           render={(...props) => <RemoveDevice cookies={props.cookies} />} />
+          */}
       </Switch>
     </div>
   );
