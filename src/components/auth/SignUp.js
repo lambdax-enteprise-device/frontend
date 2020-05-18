@@ -106,7 +106,8 @@ const SignupForm = props => {
 
       signUp(signUpInfo)
         .then(res => {
-          History.push(props.history)
+          console.log(window.location)
+          window.location.push("/dashboard")
           cookies.set("entDeviceToken", res.data.token, { path: "/dashboard" });
           //TODO: Once completed, push user to dashboard
         })
@@ -122,7 +123,7 @@ const SignupForm = props => {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form onSubmit={formik.handleSubmit} className={classes.form}>
+        <form onSubmit={formik.onSubmit} className={classes.form}>
           <TextField
             label="First Name"
             name="firstName"
