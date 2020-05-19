@@ -20,7 +20,7 @@ const ManagerApproval = () => {
 
     //Get list of devices, store it in component state
     useEffect(() => {
-        axios.get("http://enterprise-devices.herokuapp.com/api/devices")
+        axios.get("https://enterprise-devices-testing.herokuapp.com/api/devices")
         .then(res => {
             setDevices(res.data);
         })
@@ -31,7 +31,7 @@ const ManagerApproval = () => {
 
     //Get list of users, store it in component state
     useEffect(() => {
-        axios.get("http://enterprise-devices.herokuapp.com/api/users")
+        axios.get("https://enterprise-devices-testing.herokuapp.com/api/users")
         .then(res => {
             setUsers(res.data);
         })
