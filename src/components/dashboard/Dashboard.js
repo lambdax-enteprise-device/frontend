@@ -13,7 +13,6 @@ import Paper from "@material-ui/core/Paper";
 
 import Link from "@material-ui/core/Link";
 import ResponsiveDrawer from './NavBar'
-<<<<<<< HEAD
 import '@stripe/stripe-js';
 // import MenuIcon from "@material-ui/icons/Menu";
 // import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -22,8 +21,6 @@ import '@stripe/stripe-js';
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
-=======
->>>>>>> fcb79b6621f7e629fb47fc45ebdb9b25c76f6c8e
 
 // import MenuIcon from "@material-ui/icons/Menu";
 // import AppBar from "@material-ui/core/AppBar";
