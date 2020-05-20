@@ -1,33 +1,36 @@
 import {
-  FETCH_DEVICES_START,
-  FETCH_DEVICES_SUCCESS,
-  FETCH_DEVICES_FAIL
+  GET_DEVICES_START,
+  GET_DEVICES_SUCCESS,
+  GET_DEVICES_FAIL,
 } from "../actions";
 
 const initialState = {
   requests: [],
   devices: [],
-  error: ""
+  error: "",
+  gettingDevices: false,
 };
 
 export const deviceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DEVICES_START:
+    case GET_DEVICES_START:
       return {
         ...state,
         devices: action.payload,
-        error: ""
+        error: "",
+        gettingDevices: true,
       };
-    case FETCH_DEVICES_SUCCESS:
+    case GET_DEVICES_SUCCESS:
       return {
         ...state,
-        requests: action.payload,
-        error: ""
+        devices: action.payload,
+        error: "",
+        gettingDevices: false,
       };
-    case FETCH_DEVICES_FAIL:
+    case GET_DEVICES_FAIL:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;
