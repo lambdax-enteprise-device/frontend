@@ -25,7 +25,7 @@ const StyledHistoryCellItem = styled.li`
   display: block;
   height: 20px;
   padding: 10px;
-  max-width: 100px;
+  width: 100px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
