@@ -36,7 +36,7 @@ export * from "./devices.js";
 // export const view_requests = () => dispatch => {
 //   dispatch({ type: VIEW_REQUESTS });
 //   axios
-//     .get("http://enterprise-devices.herokuapp.com/api/requests")
+//     .get("https://enterprise-devices.herokuapp.com/api/requests")
 //     .then(response => {
 //       dispatch({ type: SUCCESS, payload: response.data });
 //     })

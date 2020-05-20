@@ -56,6 +56,7 @@ const Dashboard = (props) => {
   const { getDevices, addDevice, removeDevice } = props;
 
   useEffect(() => {
+
     getDevices();
   }, [getDevices]);
 
