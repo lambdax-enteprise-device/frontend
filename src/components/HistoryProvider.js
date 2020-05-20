@@ -10,6 +10,8 @@ const mockItem = () => {
     empName: "testName",
     returned: Math.random(),
     status: "true",
+    randfield: "next",
+    anotherfield: "test",
   };
 };
 const mockResponseObject = Array.from(Array(8)).map((item) => mockItem());
@@ -39,7 +41,7 @@ const dynamicSort = (key, state) => {
 };
 export const SORT_REDUCER_MOUNT = "MOUNT";
 export const SORT_REDUCER_SORT = "SORT";
-const sortReducer = (state = null, action) => {
+const sortReducer = (state, action) => {
   const { colTitle, type, payload } = action;
   switch (action.type) {
     case SORT_REDUCER_MOUNT:
@@ -56,10 +58,12 @@ export const HistoryProvider = ({ uniqueId, styles, children }) => {
 
   useEffect(() => {
     async function mockAPI() {
-      let mockResponse = await mockAction(uniqueId);
-      setSortedState({ type: SORT_REDUCER_MOUNT, payload: mockResponse });
+      try {
+        let mockResponse = await mockAction(uniqueId);
+        setSortedState({ type: SORT_REDUCER_MOUNT, payload: mockResponse });
+      } catch (error) {}
     }
-    mockAPI();
+    setTimeout(() => mockAPI(), 3000);
   }, [setSortedState]);
 
   return (

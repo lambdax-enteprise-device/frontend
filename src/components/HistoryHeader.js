@@ -40,9 +40,9 @@ export const HistoryHeader = ({ itemObject }) => {
       case true:
         return hydrateHeader();
       case false:
-        return <div>...Loading Header</div>;
+        return <StyledHistoryHeader>...Loading Header</StyledHistoryHeader>;
       default:
-        return <div>...Loading Header</div>;
+        return <StyledHistoryHeader>...Loading Header</StyledHistoryHeader>;
     }
   };
   return renderHeader();
