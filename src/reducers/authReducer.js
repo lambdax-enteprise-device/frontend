@@ -1,4 +1,4 @@
-import createBrowserHistory from '../components/utils/History'
+import createBrowserHistory from "../components/utils/History";
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -9,6 +9,7 @@ import {
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_START
+
 } from "../actions";
 const initialState = {
   isLoggingIn: false,
@@ -35,35 +36,36 @@ export const authReducer = (state = initialState, action) => {
       return {
         isLoggingIn: false,
         user: action.payload,
-        error: null
+        error: null,
+        loginSuccess: true,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         isLoggingIn: false,
-        user: {token:''},
-        error: action.payload
+        user: { token: "" },
+        error: action.payload,
       };
     case SIGNUP_START:
       return {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {}
+        user: {},
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         error: null,
-        user: action.payload
+        user: action.payload,
       };
     case SIGNUP_FAIL:
       return {
         ...state,
         isLoggingIn: false,
         error: action.payload,
-        user: {}
+        user: {},
       };
     case RESET_PASSWORD_START:
       return {
