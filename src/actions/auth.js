@@ -14,9 +14,9 @@ export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL"
 
 //Each post req is to the staging BE
 const loginURL =
-  "http://enterprise-devices-testing.herokuapp.com/api/auth/login";
+  "https://enterprise-devices-testing.herokuapp.com/api/auth/login";
 const signUpURL =
-  "http://enterprise-devices-testing.herokuapp.com/api/auth/signup";
+  "https://enterprise-devices-testing.herokuapp.com/api/auth/signup";
 
 export const login = (creds) => (dispatch) => {
   dispatch({ type: LOGIN_START });
@@ -24,8 +24,8 @@ export const login = (creds) => (dispatch) => {
   axiosWithAuth()
     .post("/api/auth/login", creds)
     .then(response => {
-    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token}})
-    return window.location.replace("/dashboard")
+      dispatch({ type: LOGIN_SUCCESS, payload: { 'token': response.data.token } })
+      return window.location.replace("/dashboard")
 
     })
     .catch((err) => {
@@ -39,7 +39,7 @@ export const signUp = (userInfo) => (dispatch) => {
   axiosWithAuth()
     .post("/api/auth/signup", userInfo)
     .then(response => {
-      dispatch({ type: SIGNUP_SUCCESS, payload: response.data});
+      dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
       return window.location.replace("/dashboard");
 
     })
@@ -51,16 +51,16 @@ export const signUp = (userInfo) => (dispatch) => {
 
 
 export const resetPass = (email) => (dispatch) => {
-  dispatch({type: RESET_PASSWORD_START})
+  dispatch({ type: RESET_PASSWORD_START })
   axiosWithAuth()
-        .get('/api/auth/password/forgotpassword',email)
-        .then(response =>{
-          dispatch({type: RESET_PASSWORD_SUCCESS,payload:response.data})
+    .get('/api/auth/password/forgotpassword', email)
+    .then(response => {
+      dispatch({ type: RESET_PASSWORD_SUCCESS, payload: response.data })
 
-        })
-        .catch((err) => {
-          console.log(err)
-          dispatch({type:RESET_PASSWORD_FAIL ,payload:err.message})
-        })
+    })
+    .catch((err) => {
+      console.log(err)
+      dispatch({ type: RESET_PASSWORD_FAIL, payload: err.message })
+    })
 }
 
