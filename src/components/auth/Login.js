@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { login } from "../../actions";
-import History from "../utils/History";
+import History from '../utils/History'
 // UI Imports
 // import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -18,6 +18,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -42,7 +43,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Login = (props) => {
+
   const classes = useStyles(); //material ui class
   const formik = useFormik({
     initialValues: {
@@ -60,12 +63,14 @@ const Login = (props) => {
     }),
 
     onSubmit: (values) => {
-      const { login } = props;
+      // console.log(props.history, "props.history on submit");
 
-      login(values)
+      props
+        .login(values)
+        //! After running this login action, the .then is never reached. We want the push to dash in there
         .then((res) => {
-          //! Error, props.cookies is undefined
-          // props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
+          console.log("INSIDE .THEN");
+          props.cookies.set("entDeviceToken", res.data.token, { path: "/" });
           //TODO: Once completed, push user to dashboard
           props.history.push("/dashboard");
         })
@@ -75,6 +80,7 @@ const Login = (props) => {
           //TODO: Render error Div
         });
     },
+
   });
 
   return (
@@ -154,28 +160,7 @@ const mapStateToProps = (state) => {
     isLoggingIn: state.authReducer.isLoggingIn,
     error: state.authReducer.error,
     user: state.authReducer.user,
-    loginSuccess: state.authReducer.loginSuccess,
   };
 };
 
 export default connect(mapStateToProps, { login })(Login);
-
-/*
-    onSubmit: values => {
-
-      const {cookies,login,error} = props
-       
-        login(values,(props.response,error =>{
-          History.push(props.history)
-        if(props.response) {
-               
-           cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
-        }
-        return error => {console.log(error)}
-     
-          //TODO: Once completed, push user to dashboard
-        }
-        ))
-    }
-
-*/
