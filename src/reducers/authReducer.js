@@ -8,17 +8,21 @@ import {
   SIGNUP_FAIL,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_START
+  RESET_PASSWORD_START,
+  GET_TOKEN_START,
+  GET_TOKEN_SUCCESS,
+  GET_DEVICES_START
 
 } from "../actions";
 const initialState = {
   isLoggingIn: false,
   error: null,
-  user: {token:'',email:''},
-  messageFromServer:'',
+  user: { token: '', email: '' },
+  messageFromServer: '',
+  isResetPassword: false,
   showError: false,
-  showNullError:false,
-  history:[]
+  showNullError: false,
+  history: []
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -29,8 +33,8 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {token:''},
-        history:[]
+        user: { token: '', email: '' },
+        history: []
       };
     case LOGIN_SUCCESS:
       return {
@@ -43,7 +47,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: false,
-        user: { token: "" },
+        user: { token: "", email: "" },
         error: action.payload,
       };
     case SIGNUP_START:
@@ -70,26 +74,42 @@ export const authReducer = (state = initialState, action) => {
     case RESET_PASSWORD_START:
       return {
         ...state,
-        showNullError:true,
-        user:{token:'',email:''},
-        showError:false
+        isResetPassword: true,
+        showNullError: true,
+        user: { token: '', email: '' },
+        showError: false
       }
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        showNullError:false,
-        user:action.payload,
-        showNullError:false
+        isResetPassword: false,
+        showNullError: false,
+        messageFromServer: action.payload,
+        showError: false
       }
 
-    case RESET_PASSWORD_FAIL :
+    case RESET_PASSWORD_FAIL:
       return {
         ...state,
-        showError:true,
-        showNullError:true,
-        user:{},
-        error:action.payload
+        isResetPassword: false,
+        showError: true,
+        showNullError: true,
+        user: {},
+        error: action.payload
       }
+    case GET_DEVICES_START:
+      return {
+        ...state,
+        showError: false,
+        token: {}
+      }
+    case GET_TOKEN_SUCCESS:
+      return {
+        ...state,
+        showError: false,
+        token: state.user.token
+      }
+
     default:
       return state;
   }

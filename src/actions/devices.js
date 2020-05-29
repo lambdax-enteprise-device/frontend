@@ -19,8 +19,9 @@ export const REMOVE_DEVICE_SUCCESS = "REMOVE_DEVICE_SUCCESS";
 export const REMOVE_DEVICE_FAIL = "REMOVE_DEVICE_FAIL";
 
 //Each req is to the staging BE
+//https://enterprise-devices-testing.herokuapp.com
 const devicesURL =
-  "https://enterprise-devices-testing.herokuapp.com/api/devices";
+  "http://localhost:4545/api/devices";
 
 export const getDevices = () => (dispatch) => {
   //   console.log("inside getdivices action");

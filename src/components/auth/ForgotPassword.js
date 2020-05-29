@@ -7,9 +7,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import {resetPass} from '../../actions/auth'
+import { resetPass } from '../../actions/auth'
 import { Typography } from '@material-ui/core';
-
 
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,67 +35,79 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ForgotPassword = (props) => {
-    const classes = useStyles()
-    const formik = useFormik({
-        initialValues:{
-            email:''
-        },
-        validateOnChange:false,
-        validationSchema:Yup.object({
-            email:Yup.string()
-            .email("Invalid email address")
-            .required("Required")
-        }),
-        onSubmit: "handleSubmit(values)",
-    })
-    const handleChange = (e) => {
-      console.log(e.get.currentTarget)
-      handleSubmit(e)
-    }
-   const handleSubmit = (e) => {
-       e.preventDefault()
-    
-   
-         resetPass('email')
-                  
-         
-      }
-    return (
-        <Container component="main" maxWidth="xs">
-        <CssBaseline/>
-        <Paper className={classes.paper}>
-            <Typography component="h1" variant="h5">
-                Reset Password
+  console.log(props)
+  const classes = useStyles()
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+
+    }),
+    onSubmit: (values) => {
+      props.
+        resetPass(values)
+
+
+
+
+    },
+  })
+  const { messageFromServer } = props
+
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Paper className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Reset Password
             </Typography>
-        <form 
-            className={classes.form}
-            onSubmit={((e) => {handleSubmit(e)})}
-            >
-                <input
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                type="email"
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={((e) => {handleChange(e)})}
-                />
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                >
-                    Reset Password
+        <form
+          className={classes.form}
+          onSubmit={formik.handleSubmit}
+        >
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            type="email"
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={formik.handleChange}
+            helperText={formik.errors.email}
+            {...formik.getFieldProps("email")}
+
+
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Reset Password
                 </Button>
-            </form>
-        </Paper>
-        </Container>
-    )
+          <div>{messageFromServer.url != null ? "Success!!! A password reset link has been sent to your email" : messageFromServer}</div>
+        </form>
+      </Paper>
+    </Container>
+  )
 }
-export default ForgotPassword
+const mapStateToProps = (state) => {
+  return {
+    isResetPassword: state.authReducer.isResetPassword,
+    showError: state.authReducer.showError,
+    messageFromServer: state.authReducer.messageFromServer
+  }
+}
+export default connect(mapStateToProps, { resetPass })(ForgotPassword)

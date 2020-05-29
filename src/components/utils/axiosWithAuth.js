@@ -8,7 +8,7 @@ export const axiosWithAuth = token => {
       Authorization: `Bearer ${token}`
     },
     // baseURL: process.env.REACT_APP_BASEURL
-    
-    baseURL:"https://enterprise-devices-testing.herokuapp.com"
+
+    baseURL: "https://enterprise-devices-testing.herokuapp.com"
   });
 };
