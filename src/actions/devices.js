@@ -2,8 +2,11 @@ import axios from "axios";
 
 //Get Devices
 export const GET_DEVICES_START = "GET_DEVICES_START";
+export const GET_DEVICES_BY_COMPANY_START = "GET_DEVICES_BY_COMPANY_START";
 export const GET_DEVICES_SUCCESS = "GET_DEVICES_SUCCESS";
+export const GET_DEVICES_BY_COMPANY_SUCCESS = "GET_DEVICES_BY_COMPANY_SUCCESS";
 export const GET_DEVICES_FAIL = "GET_DEVICES_FAIL";
+export const GET_DEVICES_BY_COMPANY_FAIL = "GET_DEVICES_BY_COMPANY_FAIL";
 
 //Add Device
 export const ADD_DEVICE_START = "ADD_DEVICE_START";
@@ -35,6 +38,22 @@ export const getDevices = () => (dispatch) => {
       console.log("Error getting devices", err);
     });
 };
+
+export const getDevicesByCompanyId = (id) => (dispatch) => {
+  dispatch({ type: GET_DEVICES_BY_COMPANY_START });
+  return axios
+    .get(
+      `http://enterprise-devices-testing.herokuapp.com/api/devices/company/${id}`
+    )
+    .then((res) => {
+      console.log(res, "res in getDevicesByCompanyId");
+      dispatch({ type: GET_DEVICES_BY_COMPANY_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      console.log("Error getting devices by company ID: ", err);
+    });
+};
+
 export const addDevice = (device) => (dispatch) => {
   dispatch({ type: ADD_DEVICE_START });
   return axios
@@ -46,6 +65,7 @@ export const addDevice = (device) => (dispatch) => {
       console.log("Error addding a device,", err);
     });
 };
+
 export const updateDevice = (changes) => (dispatch) => {
   dispatch({ type: UPDATE_DEVICE_START });
   return axios
@@ -57,6 +77,7 @@ export const updateDevice = (changes) => (dispatch) => {
       console.log("Error updating device, ", err);
     });
 };
+
 export const removeDevice = (device) => (dispatch) => {
   dispatch({ type: REMOVE_DEVICE_START });
   return axios

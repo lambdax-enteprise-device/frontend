@@ -1,10 +1,14 @@
 import React from "react";
 import { useEffect, useState, useReducer, useCallback } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 
 //actions
-import { getDevices, addDevice, updateDevice } from "../../actions/devices.js";
+import {
+  getDevices,
+  addDevice,
+  updateDevice,
+  getDevicesByCompanyId,
+} from "../../actions/devices.js";
 
 //styles
 import { makeStyles } from "@material-ui/core/styles";
@@ -53,12 +57,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = (props) => {
   const classes = useStyles();
-  const { getDevices, addDevice, removeDevice } = props;
+  const {
+    getDevices,
+    addDevice,
+    removeDevice,
+    getDevicesByCompanyId,
+    user,
+  } = props;
+
+  const userInfo = user.user;
 
   useEffect(() => {
-
-    getDevices();
-  }, [getDevices]);
+    getDevicesByCompanyId(userInfo.companyId);
+  }, [getDevicesByCompanyId]);
 
   return (
     <div className={classes.root}>
@@ -90,6 +101,8 @@ const mapStateToProps = (state) => {
     devices: state.deviceReducer.devices,
     error: state.deviceReducer.error,
     gettingDevices: state.deviceReducer.gettingDevices,
+    gettingDevicesByCompnayId: state.deviceReducer.getDevicesByCompanyId,
+    user: state.authReducer.user,
   };
 };
 
@@ -97,4 +110,5 @@ export default connect(mapStateToProps, {
   getDevices,
   addDevice,
   updateDevice,
+  getDevicesByCompanyId,
 })(Dashboard);

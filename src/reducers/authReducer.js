@@ -8,17 +8,16 @@ import {
   SIGNUP_FAIL,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_START
-
+  RESET_PASSWORD_START,
 } from "../actions";
 const initialState = {
   isLoggingIn: false,
   error: null,
-  user: {token:'',email:''},
-  messageFromServer:'',
+  user: { token: "" },
+  messageFromServer: "",
   showError: false,
-  showNullError:false,
-  history:[]
+  showNullError: false,
+  history: [],
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -29,8 +28,8 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: true,
         error: null,
-        user: {token:''},
-        history:[]
+        user: { token: "" },
+        history: [],
       };
     case LOGIN_SUCCESS:
       return {
@@ -70,26 +69,26 @@ export const authReducer = (state = initialState, action) => {
     case RESET_PASSWORD_START:
       return {
         ...state,
-        showNullError:true,
-        user:{token:'',email:''},
-        showError:false
-      }
+        showNullError: true,
+        user: { token: "", email: "" },
+        showError: false,
+      };
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        showNullError:false,
-        user:action.payload,
-        showNullError:false
-      }
+        showNullError: false,
+        user: action.payload,
+        showNullError: false,
+      };
 
-    case RESET_PASSWORD_FAIL :
+    case RESET_PASSWORD_FAIL:
       return {
         ...state,
-        showError:true,
-        showNullError:true,
-        user:{},
-        error:action.payload
-      }
+        showError: true,
+        showNullError: true,
+        user: {},
+        error: action.payload,
+      };
     default:
       return state;
   }

@@ -138,7 +138,10 @@ const Login = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="https://enterprise-devices-testing.herokuapp.com/api/auth/password/forgotpassword" variant="body2">
+              <Link
+                href="https://enterprise-devices-testing.herokuapp.com/api/auth/password/forgotpassword"
+                variant="body2"
+              >
                 Forgot password?
               </Link>
             </Grid>
@@ -159,23 +162,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { login })(Login);
-
-/*
-    onSubmit: values => {
-
-      const {cookies,login,error} = props
-       
-        login(values,(props.response,error =>{
-          History.push(props.history)
-        if(props.response) {
-               
-           cookies.cookies.set("entDeviceToken", props.response.data.token, { path: props.state.history });
-        }
-        return error => {console.log(error)}
-     
-          //TODO: Once completed, push user to dashboard
-        }
-        ))
-    }
-
-*/

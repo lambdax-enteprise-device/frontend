@@ -10,7 +10,7 @@ export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const RESET_PASSWORD_START = "RESET_PASSWORD_START";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL"
+export const RESET_PASSWORD_FAIL = "RESET_PASSWORD_FAIL";
 
 //Each post req is to the staging BE
 const loginURL =
@@ -21,12 +21,18 @@ const signUpURL =
 export const login = (creds) => (dispatch) => {
   dispatch({ type: LOGIN_START });
 
-  axiosWithAuth()
+  return axiosWithAuth()
     .post("/api/auth/login", creds)
-    .then(response => {
-    dispatch({type:LOGIN_SUCCESS,payload:{'token':response.data.token}})
-    return window.location.replace("/dashboard")
-
+    .then((response) => {
+      console.log("LOGIN THEN");
+      console.log(response, "LOGIN RES");
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: { token: response.data.token, user: response.data.user },
+      });
+      //! This gets rid of redux state on the replace, rendering this action useless. The push is happening on the login
+      //! component after the action call now.
+      // return window.location.replace("/dashboard");
     })
     .catch((err) => {
       dispatch({ type: LOGIN_FAIL, payload: err.message });
@@ -38,10 +44,9 @@ export const signUp = (userInfo) => (dispatch) => {
 
   axiosWithAuth()
     .post("/api/auth/signup", userInfo)
-    .then(response => {
-      dispatch({ type: SIGNUP_SUCCESS, payload: response.data});
+    .then((response) => {
+      dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
       return window.location.replace("/dashboard");
-
     })
     .catch((err) => {
       console.log(err);
@@ -49,18 +54,15 @@ export const signUp = (userInfo) => (dispatch) => {
     });
 };
 
-
 export const resetPass = (email) => (dispatch) => {
-  dispatch({type: RESET_PASSWORD_START})
+  dispatch({ type: RESET_PASSWORD_START });
   axiosWithAuth()
-        .get('/api/auth/password/forgotpassword',email)
-        .then(response =>{
-          dispatch({type: RESET_PASSWORD_SUCCESS,payload:response.data})
-
-        })
-        .catch((err) => {
-          console.log(err)
-          dispatch({type:RESET_PASSWORD_FAIL ,payload:err.message})
-        })
-}
-
+    .get("/api/auth/password/forgotpassword", email)
+    .then((response) => {
+      dispatch({ type: RESET_PASSWORD_SUCCESS, payload: response.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: RESET_PASSWORD_FAIL, payload: err.message });
+    });
+};
